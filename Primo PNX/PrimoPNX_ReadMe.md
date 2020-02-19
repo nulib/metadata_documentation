@@ -25,7 +25,7 @@ Formats crosswalked to MODS include:
    - In `MODStoPNX.xsl`, search on "01NWU" to find information that is hard coded into the PNX and change it to suit local Primo settings.
 
 
-3. Propriety XML derived from JSON harvested from NUL�s Digital Repository. Files from this system are labeled `Glaze`.
+3. Propriety XML derived from JSON harvested from NUL's Digital Repository. Files from this system are labeled `Glaze`.
 
    - XML generated from JSON that included arrays resulted in different nesting levels depending on how the conversion was done, therefore some XSLT transformations look to multiple layers to get the data.
 
