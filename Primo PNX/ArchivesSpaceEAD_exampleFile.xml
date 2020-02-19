@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+	<eadheader countryencoding="iso3166-1" dateencoding="iso8601" langencoding="iso639-2b" repositoryencoding="iso15511">
+		<eadid countrycode="US" mainagencycode="US-US-IEN" url="https://findingaids.library.northwestern.edu/repositories/6/resources/545">25/7</eadid>
+		<filedesc>
+			<titlestmt>
+				<titleproper type="filing">1949 Rose Bowl Collection</titleproper>
+				<titleproper>Guide to the 1949 Rose Bowl Collection <num>25/7</num>
+				</titleproper>
+			</titlestmt>
+			<publicationstmt>
+				<publisher>Northwestern University Archives</publisher>
+				<address>
+					<addressline>Deering Library, Room 110</addressline>
+					<addressline>1970 Campus Dr.</addressline>
+					<addressline>Evanston, IL 60208-2300</addressline>
+					<addressline>archives@northwestern.edu</addressline>
+					<addressline>URL: <extptr xlink:href="http://www.library.northwestern.edu/archives" xlink:show="new" xlink:title="http://www.library.northwestern.edu/archives" xlink:type="simple"/>
+					</addressline>
+				</address>
+			</publicationstmt>
+		</filedesc>
+		<profiledesc>
+			<creation>This finding aid was produced using ArchivesSpace on <date>2020-02-18 10:37:54 -0600</date>.</creation>
+			<langusage>und</langusage>
+			<descrules>Describing Archives: A Content Standard</descrules>
+		</profiledesc>
+	</eadheader>
+	<archdesc level="collection">
+		<did>
+			<langmaterial>
+				<language langcode="eng">English</language>
+			</langmaterial>
+			<repository>
+				<corpname>Northwestern University Archives</corpname>
+			</repository>
+			<unittitle>1949 Rose Bowl Collection</unittitle>
+			<origination label="creator">
+				<corpname source="naf">Northwestern University (Evanston, Ill.). University Archives</corpname>
+			</origination>
+			<unitid>25/7</unitid>
+			<physdesc altrender="whole">
+				<extent altrender="materialtype spaceoccupied">1.50 Linear Feet</extent>
+			</physdesc>
+			<unitdate normal="1948/2009" type="inclusive">1948-2009</unitdate>
+			<unitdate type="bulk">1948-1949</unitdate>
+			<abstract id="aspace_a86916aef20628142dd5178f8e411064">This collection holds an assortment of items pertaining to the 1949 Rose Bowl football game, which Northwestern won over the California Golden Bears. Items include media clippings, expense reports, souvenir programs, train menus, and other materials documenting the game, the participation of the NU Marching Band, the trip to and from Los Angeles, and related celebratory events.</abstract>
+		</did>
+		<scopecontent id="aspace_0745bc265b5696ca39635ef6909963e0">
+			<head>Scope and Contents</head>
+			<p>Northwestern University was far from the favorite to win the 1949 Rose Bowl. In fact, early speculation in the<emph render='italic'> Daily Northwestern </emph>assumed that Minnesota, Purdue or Wisconsin would be making the trip to Pasadena. The <emph render='italic'>Daily Northwestern</emph> claimed that "courage and determination" and that "old purple sprit" were responsible for Northwestern's football team finding themselves with the second place seat in the Western Conference (now the Big Ten). The team's mix of 18 year old freshmen and returning World War Two veterans in their mid-twenties could have resulted in tension and disunity but, according to coach Voigts, the older players mentored and encouraged the younger ones.</p>
+			<p>The University of Michigan's team was the undefeated league champions but conference rules dictated that no team could return to the Rose Bowl within three years of their last appearance. Thus, by default, Northwestern entered its first Rose Bowl. To celebrate there was a large rally where it was announced by University President Franklin B. Snyder and team captain Alex Sarkisian that classes would be suspended for a week</p>
+			<p>The game was made even more exciting by the announcement that the Wildcats would be facing the California Golden Bears lead by ex-Northwestern coach Lynn "Pappy" Waldorf. Northwestern coach, Bob Voigts, was a former Northwestern player and star tackle on Waldorf's 1936 conference winning team. 30 out of 45 of the Northwestern Rose Bowl team members had played for coach Waldorf in previous years.</p>
+			<p>The battle of mentor verses protégé took place on New Year's Day 1949 in front of over 93,000 fans. Minutes into the game 'Cat's halfback Frank Aschenbrenner took Quarterback Don Burson's handoff and ran the ball 73 yards to score a touchdown and set the record for the longest run in a Rose Bowl, a record that stood for 44 years. Aschenbrenner touchdown stunned everyone watching and player later recounted that the massive stadium fell into total silence. California responded by sending future baseball MVP Jackie Jenson 67 yards to tie the game.</p>
+			<p>In the second quarter, Northwestern All-American fullback Art Murakowski rushed into California's endzone but fumbled the ball. In one of the most controversial decisions in Rose Bowl history, the play was ruled a touchdown for Northwestern. There are some who contest that the fumble happened before Murakowski crossed into the endzone and Northwestern's Victory should he listed in the records book with an asterisk next to the game's final score. The Wildcats missed the extra point giving Northwestern a 13-7 lead. Despite the contentious ruling California returned from the haft time and set up the go-ahead score giving them a one point lead. With only three minutes left in regulation the Wildcat's other halfback, Ed Tunnicliff, (who was missing a couple of fingers form a combat injury he sustained in Germany) ran for a 43-yard touchdown, securing Northwestern's 20-14 victory.</p>
+			<p>Newspapers for the time remarked on the tight win by Northwestern and praised the the Northwestern Marching Band. The San Francisco examiner extoled " There's always going to be doubt as to the validity of Northwestern's 20-14 win over California's football team, but Northwestern's band certainly came away from the Rose Bowl a clear-cut victor…the Northwestern band looked all over a winner form its deepest throated tuba right down to its squeakiest piccolo." The band, riding high off of their excellent performance, had even more reason to celebrate when their train back to Evanston was stranded by a blizzard in Cheyenne, Wyoming adding an extra week to their vacation.</p>
+			<p>Northwestern did not return to the Rose Bowl for another 47 years.</p>
+		</scopecontent>
+		<acqinfo id="aspace_f4994055f50ba5a1bb866ef7784620cd">
+			<head>Source of Acquisition</head>
+			<p>Materials in this collection were transferred from the University General files in June of 2013. Union Pacific Train menus donated by Ed Henze (McCormick 1950) and Jerome Kochka (Speech 1950).</p>
+		</acqinfo>
+		<accessrestrict id="aspace_331486b92f50431a22e46819f2898275">
+			<head>Conditions Governing Access</head>
+			<p>No restrictions.</p>
+		</accessrestrict>
+		<relatedmaterial id="aspace_1d3e92e361a6d64e769223a0b908b29b">
+			<head>Related Materials</head>
+			<p>Film of the 1949 Rosebowl game (see URL)</p>
+			<p>http://www.youtube.com/watch?v=iRaFcdmddsE</p>
+		</relatedmaterial>
+		<controlaccess>
+			<corpname source="local">Rose Bowl (Football game) (1949 : Pasadena, Calif.)</corpname>
+			<corpname authfilenumber="n96037714" source="naf">Northwestern Wildcats (Football team)</corpname>
+			<corpname source="local">University of California, Berkeley--Football</corpname>
+			<corpname source="local">Northwestern University (Evanston, Ill.)--Football</corpname>
+		</controlaccess>
+		<dsc>
+			<c01 id="aspace_437864" level="file">
+				<did>
+					<unittitle>American Football Coaches Proceedings, "Offensive and Defensive Plans of Rose Bowl Game"</unittitle>
+					<unitid>Folder 1</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_a5f5414066e9977738f78aeb511cdd86" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_9300d98bd6ad7468ac81841e2863bda1" parent="aspace_a5f5414066e9977738f78aeb511cdd86" type="folder">1</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437865" level="file">
+				<did>
+					<unittitle>Clippings from Northwestern University Publications</unittitle>
+					<unitid>Folder 2</unitid>
+					<unitdate>1948-9</unitdate>
+					<container id="aspace_fa8e0ce91bbe5ea5cb87d9eb060f3828" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_e596e733c2da0a57e936cf1578508757" parent="aspace_fa8e0ce91bbe5ea5cb87d9eb060f3828" type="folder">2</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437866" level="file">
+				<did>
+					<unittitle>Clippings from Non-Northwestern University Publications</unittitle>
+					<unitid>Folder 3</unitid>
+					<unitdate>1948-9</unitdate>
+					<container id="aspace_097d91ea3bd6ce84dca61a59ad5d23f0" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_2587b74f4bc6b854626e70d528c35152" parent="aspace_097d91ea3bd6ce84dca61a59ad5d23f0" type="folder">3</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437867" level="file">
+				<did>
+					<unittitle>Clippings from Non-Northwestern University Publications</unittitle>
+					<unitid>Folder 4</unitid>
+					<unitdate>1948-9</unitdate>
+					<container id="aspace_a1c869930dd91f6d1cc2c414e6b48f90" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_7b22a8c6a239b77716e37dbe1047f2b2" parent="aspace_a1c869930dd91f6d1cc2c414e6b48f90" type="folder">4</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437868" level="file">
+				<did>
+					<unittitle>Clippings from Non-Northwestern University Publications</unittitle>
+					<unitid>Folder 5</unitid>
+					<unitdate>1948-2009</unitdate>
+					<container id="aspace_14efab4b941002b2dc769a76d2de2134" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_d7f7d407047914e3865eb5931666fe55" parent="aspace_14efab4b941002b2dc769a76d2de2134" type="folder">5</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437869" level="file">
+				<did>
+					<unittitle>Financial Documents</unittitle>
+					<unitid>Folder 6</unitid>
+					<unitdate>1948-9</unitdate>
+					<container id="aspace_cb0557c257b0e6b847bdaa8d50a81e78" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_0c546b59617a6a6e05c43837d3878f68" parent="aspace_cb0557c257b0e6b847bdaa8d50a81e78" type="folder">6</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437870" level="file">
+				<did>
+					<unittitle>Northwestern University Marching Band</unittitle>
+					<unitid>Folder 7</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_ceb9aa1f8bbbb8eaaea2f1c6176b402e" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_6acc4ad03c19e51200fe6c2638e648a3" parent="aspace_ceb9aa1f8bbbb8eaaea2f1c6176b402e" type="folder">7</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437871" level="file">
+				<did>
+					<unittitle>Northwestern University Marching Band Telegram</unittitle>
+					<unitid>Folder 8</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_4bc8765f483a3590fd9281ec3821537a" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_81f1cc086432f45853f1f3f769ee9ac4" parent="aspace_4bc8765f483a3590fd9281ec3821537a" type="folder">8</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437872" level="file">
+				<did>
+					<unittitle>Railway Ephemera</unittitle>
+					<unitid>Folder 9</unitid>
+					<unitdate>1948-9</unitdate>
+					<container id="aspace_3359240855c06e56297cf02f4be852c9" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_7d6f1159b730aa36fe5c13c1e5a6f1f4" parent="aspace_3359240855c06e56297cf02f4be852c9" type="folder">9</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437873" level="file">
+				<did>
+					<unittitle>Reunions</unittitle>
+					<unitid>Folder 10</unitid>
+					<unitdate>1974-84</unitdate>
+					<container id="aspace_69a156ac7cd613daedd87ff9653cbaa7" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_fe9936d5d66633200e264a5201f0f421" parent="aspace_69a156ac7cd613daedd87ff9653cbaa7" type="folder">10</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437874" level="file">
+				<did>
+					<unittitle>Rose Bowl Tickets</unittitle>
+					<unitid>Folder 11</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_6ac1c8aa322c0f26761cb3ebedbadd9d" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_de342c6b80b7cb9be745d14ad3701052" parent="aspace_6ac1c8aa322c0f26761cb3ebedbadd9d" type="folder">11</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437875" level="file">
+				<did>
+					<unittitle>Rose Bowl Program</unittitle>
+					<unitid>Folder 12</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_22c7fef383d27d46d9a0fbf3d10a3948" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_0a91b0a2ec931b14b0ec409034451cdb" parent="aspace_22c7fef383d27d46d9a0fbf3d10a3948" type="folder">12</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437876" level="file">
+				<did>
+					<unittitle>Rose Bowl Program</unittitle>
+					<unitid>Folder 13</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_1818fa4939aa55042560a596335efd66" label="Mixed Materials" type="box">1</container>
+					<container id="aspace_3cce84e0a0c80b0dd96524e07e475e14" parent="aspace_1818fa4939aa55042560a596335efd66" type="folder">13</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437879" level="file">
+				<did>
+					<unittitle>Rose Bowl Program</unittitle>
+					<unitid>Folder 1</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_4a8ab8095fb8e5033b17e2a1094abd6f" label="Mixed Materials" type="box">2</container>
+					<container id="aspace_075472f54adaebe5ae1ae2b8ef239264" parent="aspace_4a8ab8095fb8e5033b17e2a1094abd6f" type="folder">1</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437880" level="file">
+				<did>
+					<unittitle>Rose Bowl Program</unittitle>
+					<unitid>Folder 2</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_e0eb9b4a817a63428a933b08ca1c7fdf" label="Mixed Materials" type="box">2</container>
+					<container id="aspace_12584f65366f0161e321567c18206449" parent="aspace_e0eb9b4a817a63428a933b08ca1c7fdf" type="folder">2</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437881" level="file">
+				<did>
+					<unittitle>Rose Bowl Program</unittitle>
+					<unitid>Folder 3</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_43731987623e55e8ba6fb7182caeb15d" label="Mixed Materials" type="box">2</container>
+					<container id="aspace_02ccd71e2bacfe1e0045fd3104534c89" parent="aspace_43731987623e55e8ba6fb7182caeb15d" type="folder">3</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437882" level="file">
+				<did>
+					<unittitle>Rose Bowl Reference Sources</unittitle>
+					<unitid>Folder 4</unitid>
+					<unitdate>1949-2008</unitdate>
+					<container id="aspace_b110ac949cba1bfe738a35d1dd3dbaa7" label="Mixed Materials" type="box">2</container>
+					<container id="aspace_f79cc5353caec290f3259d019d8ed7c1" parent="aspace_b110ac949cba1bfe738a35d1dd3dbaa7" type="folder">4</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437883" level="file">
+				<did>
+					<unittitle>Tournament of Roses</unittitle>
+					<unitid>Folder 5</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_c35e70b6e6832b54199ce99b791b183a" label="Mixed Materials" type="box">2</container>
+					<container id="aspace_4f04e294c3f901f37717f12219f268b0" parent="aspace_c35e70b6e6832b54199ce99b791b183a" type="folder">5</container>
+				</did>
+			</c01>
+			<c01 id="aspace_437884" level="file">
+				<did>
+					<unittitle>Tournament of Roses Tickets</unittitle>
+					<unitid>Folder 6</unitid>
+					<unitdate>1949</unitdate>
+					<container id="aspace_f271dbeb950b09c2ebc9fcd8d753b464" label="Mixed Materials" type="box">2</container>
+					<container id="aspace_263efa25ea90d6554ff39c7e022c8ef5" parent="aspace_f271dbeb950b09c2ebc9fcd8d753b464" type="folder">6</container>
+				</did>
+			</c01>
+		</dsc>
+	</archdesc>
+</ead>

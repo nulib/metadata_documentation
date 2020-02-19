@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:ead="urn:isbn:1-931666-22-9" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd">
+	<titleInfo>
+		<title>Guide to the 1949 Rose Bowl Collection, 1948-2009</title>
+	</titleInfo>
+	<titleInfo otherType="filing">
+		<title>1949 Rose Bowl Collection</title>
+	</titleInfo>
+	<name type="corporate" authority="naf">
+		<role>
+			<roleTerm type="text">creator</roleTerm>
+		</role>
+		<namePart>Northwestern University (Evanston, Ill.). University Archives</namePart>
+		<displayForm>Northwestern University (Evanston, Ill.). University Archives</displayForm>
+	</name>
+	<typeOfResource manuscript="yes" collection="yes">mixed material</typeOfResource>
+	<genre authority="marcgt">finding aid</genre>
+	<originInfo>
+		<publisher>Northwestern University Archives</publisher>
+		<dateCreated>1948-2009</dateCreated>
+		<dateCreated encoding="marc" point="start">1948</dateCreated>
+		<dateCreated encoding="marc" point="end">2009</dateCreated>
+		<issuance>monographic</issuance>
+	</originInfo>
+	<language>
+		<languageTerm type="text">English</languageTerm>
+		<languageTerm type="code" authority="iso639-2b">eng</languageTerm>
+	</language>
+	<physicalDescription>
+		<form authority="marcform">print</form>
+		<internetMediaType>text/xml</internetMediaType>
+		<digitalOrigin>born digital</digitalOrigin>
+		<extent>1.50 Linear Feet</extent>
+	</physicalDescription>
+	<abstract>This collection holds an assortment of items pertaining to the 1949 Rose Bowl football game, which Northwestern won over the California Golden Bears. Items include media clippings, expense reports, souvenir programs, train menus, and other materials documenting the game, the participation of the NU Marching Band, the trip to and from Los Angeles, and related celebratory events.</abstract>
+	<note displayLabel="Scope and Contents">Northwestern University was far from the favorite to win the 1949 Rose Bowl. In fact, early speculation in the Daily Northwestern assumed that Minnesota, Purdue or Wisconsin would be making the trip to Pasadena. The Daily Northwestern claimed that "courage and determination" and that "old purple sprit" were responsible for Northwestern's football team finding themselves with the second place seat in the Western Conference (now the Big Ten). The team's mix of 18 year old freshmen and returning World War Two veterans in their mid-twenties could have resulted in tension and disunity but, according to coach Voigts, the older players mentored and encouraged the younger ones. The University of Michigan's team was the undefeated league champions but conference rules dictated that no team could return to the Rose Bowl within three years of their last appearance. Thus, by default, Northwestern entered its first Rose Bowl. To celebrate there was a large rally where it was announced by University President Franklin B. Snyder and team captain Alex Sarkisian that classes would be suspended for a week The game was made even more exciting by the announcement that the Wildcats would be facing the California Golden Bears lead by ex-Northwestern coach Lynn "Pappy" Waldorf. Northwestern coach, Bob Voigts, was a former Northwestern player and star tackle on Waldorf's 1936 conference winning team. 30 out of 45 of the Northwestern Rose Bowl team members had played for coach Waldorf in previous years. The battle of mentor verses protégé took place on New Year's Day 1949 in front of over 93,000 fans. Minutes into the game 'Cat's halfback Frank Aschenbrenner took Quarterback Don Burson's handoff and ran the ball 73 yards to score a touchdown and set the record for the longest run in a Rose Bowl, a record that stood for 44 years. Aschenbrenner touchdown stunned everyone watching and player later recounted that the massive stadium fell into total silence. California responded by sending future baseball MVP Jackie Jenson 67 yards to tie the game. In the second quarter, Northwestern All-American fullback Art Murakowski rushed into California's endzone but fumbled the ball. In one of the most controversial decisions in Rose Bowl history, the play was ruled a touchdown for Northwestern. There are some who contest that the fumble happened before Murakowski crossed into the endzone and Northwestern's Victory should he listed in the records book with an asterisk next to the game's final score. The Wildcats missed the extra point giving Northwestern a 13-7 lead. Despite the contentious ruling California returned from the haft time and set up the go-ahead score giving them a one point lead. With only three minutes left in regulation the Wildcat's other halfback, Ed Tunnicliff, (who was missing a couple of fingers form a combat injury he sustained in Germany) ran for a 43-yard touchdown, securing Northwestern's 20-14 victory. Newspapers for the time remarked on the tight win by Northwestern and praised the the Northwestern Marching Band. The San Francisco examiner extoled " There's always going to be doubt as to the validity of Northwestern's 20-14 win over California's football team, but Northwestern's band certainly came away from the Rose Bowl a clear-cut victor…the Northwestern band looked all over a winner form its deepest throated tuba right down to its squeakiest piccolo." The band, riding high off of their excellent performance, had even more reason to celebrate when their train back to Evanston was stranded by a blizzard in Cheyenne, Wyoming adding an extra week to their vacation. Northwestern did not return to the Rose Bowl for another 47 years.</note>
+	<note type="acquisition" displayLabel="Source of Acquisition">Materials in this collection were transferred from the University General files in June of 2013. Union Pacific Train menus donated by Ed Henze (McCormick 1950) and Jerome Kochka (Speech 1950).</note>
+	<accessCondition type="restrictionOnAccess" displayLabel="Conditions Governing Access">No restrictions.</accessCondition>
+	<subject authority="local">
+		<name type="corporate">
+			<namePart>Rose Bowl (Football game) (1949 : Pasadena, Calif.)</namePart>
+			<displayForm>Rose Bowl (Football game) (1949 : Pasadena, Calif.)</displayForm>
+		</name>
+	</subject>
+	<subject authority="naf">
+		<name type="corporate">
+			<namePart>Northwestern Wildcats (Football team)</namePart>
+			<displayForm>Northwestern Wildcats (Football team)</displayForm>
+		</name>
+	</subject>
+	<subject authority="local">
+		<name type="corporate">
+			<namePart>University of California, Berkeley--Football</namePart>
+			<displayForm>University of California, Berkeley--Football</displayForm>
+		</name>
+	</subject>
+	<subject authority="local">
+		<name type="corporate">
+			<namePart>Northwestern University (Evanston, Ill.)--Football</namePart>
+			<displayForm>Northwestern University (Evanston, Ill.)--Football</displayForm>
+		</name>
+	</subject>
+	<identifier type="local" displayLabel="ID">Northwestern University Archives 25/7</identifier>
+	<identifier displayLabel="PID" type="local">25/7</identifier>
+	<location>
+		<url displayLabel="Online Finding Aid" access="object in context">https://findingaids.library.northwestern.edu/repositories/6/resources/545</url>
+	</location>
+	<location>
+		<physicalLocation>Northwestern University Archives</physicalLocation>
+		<shelfLocator>25/7</shelfLocator>
+	</location>
+	<recordInfo>
+		<recordOrigin>ArchivesSpace</recordOrigin>
+		<recordContentSource authority="marcorg">IEN</recordContentSource>
+		<recordCreationDate encoding="marc">2020-02-18 10:37:54 -0600</recordCreationDate>
+		<recordChangeDate encoding="iso8601">20200218104248.0</recordChangeDate>
+		<recordIdentifier source="IEN">25/7</recordIdentifier>
+		<languageOfCataloging>
+			<languageTerm authority="iso639-2b" type="code">und</languageTerm>
+		</languageOfCataloging>
+		<recordInfoNote>item</recordInfoNote>
+	</recordInfo>
+	<note type="for indexing only">25/7  1949 Rose Bowl Collection  Guide to the 1949 Rose Bowl Collection   25/7  Northwestern University Archives  Deering Library, Room 110  1970 Campus Dr.  Evanston, IL 60208-2300  archives@northwestern.edu  URL:   This finding aid was produced using ArchivesSpace on   2020-02-18 10:37:54 -0600  .  und  Describing Archives: A Content Standard  English  Northwestern University Archives  1949 Rose Bowl Collection  Northwestern University (Evanston, Ill.). University Archives  25/7  1.50 Linear Feet  1948-2009  1948-1949  This collection holds an assortment of items pertaining to the 1949 Rose Bowl football game, which Northwestern won over the California Golden Bears. Items include media clippings, expense reports, souvenir programs, train menus, and other materials documenting the game, the participation of the NU Marching Band, the trip to and from Los Angeles, and related celebratory events.  Scope and Contents  Northwestern University was far from the favorite to win the 1949 Rose Bowl. In fact, early speculation in the   Daily Northwestern   assumed that Minnesota, Purdue or Wisconsin would be making the trip to Pasadena. The   Daily Northwestern   claimed that "courage and determination" and that "old purple sprit" were responsible for Northwestern's football team finding themselves with the second place seat in the Western Conference (now the Big Ten). The team's mix of 18 year old freshmen and returning World War Two veterans in their mid-twenties could have resulted in tension and disunity but, according to coach Voigts, the older players mentored and encouraged the younger ones.  The University of Michigan's team was the undefeated league champions but conference rules dictated that no team could return to the Rose Bowl within three years of their last appearance. Thus, by default, Northwestern entered its first Rose Bowl. To celebrate there was a large rally where it was announced by University President Franklin B. Snyder and team captain Alex Sarkisian that classes would be suspended for a week  The game was made even more exciting by the announcement that the Wildcats would be facing the California Golden Bears lead by ex-Northwestern coach Lynn "Pappy" Waldorf. Northwestern coach, Bob Voigts, was a former Northwestern player and star tackle on Waldorf's 1936 conference winning team. 30 out of 45 of the Northwestern Rose Bowl team members had played for coach Waldorf in previous years.  The battle of mentor verses protégé took place on New Year's Day 1949 in front of over 93,000 fans. Minutes into the game 'Cat's halfback Frank Aschenbrenner took Quarterback Don Burson's handoff and ran the ball 73 yards to score a touchdown and set the record for the longest run in a Rose Bowl, a record that stood for 44 years. Aschenbrenner touchdown stunned everyone watching and player later recounted that the massive stadium fell into total silence. California responded by sending future baseball MVP Jackie Jenson 67 yards to tie the game.  In the second quarter, Northwestern All-American fullback Art Murakowski rushed into California's endzone but fumbled the ball. In one of the most controversial decisions in Rose Bowl history, the play was ruled a touchdown for Northwestern. There are some who contest that the fumble happened before Murakowski crossed into the endzone and Northwestern's Victory should he listed in the records book with an asterisk next to the game's final score. The Wildcats missed the extra point giving Northwestern a 13-7 lead. Despite the contentious ruling California returned from the haft time and set up the go-ahead score giving them a one point lead. With only three minutes left in regulation the Wildcat's other halfback, Ed Tunnicliff, (who was missing a couple of fingers form a combat injury he sustained in Germany) ran for a 43-yard touchdown, securing Northwestern's 20-14 victory.  Newspapers for the time remarked on the tight win by Northwestern and praised the the Northwestern Marching Band. The San Francisco examiner extoled " There's always going to be doubt as to the validity of Northwestern's 20-14 win over California's football team, but Northwestern's band certainly came away from the Rose Bowl a clear-cut victor…the Northwestern band looked all over a winner form its deepest throated tuba right down to its squeakiest piccolo." The band, riding high off of their excellent performance, had even more reason to celebrate when their train back to Evanston was stranded by a blizzard in Cheyenne, Wyoming adding an extra week to their vacation.  Northwestern did not return to the Rose Bowl for another 47 years.  Source of Acquisition  Materials in this collection were transferred from the University General files in June of 2013. Union Pacific Train menus donated by Ed Henze (McCormick 1950) and Jerome Kochka (Speech 1950).  Conditions Governing Access  No restrictions.  Related Materials  Film of the 1949 Rosebowl game (see URL)  http://www.youtube.com/watch?v=iRaFcdmddsE  Rose Bowl (Football game) (1949 : Pasadena, Calif.)  Northwestern Wildcats (Football team)  University of California, Berkeley--Football  Northwestern University (Evanston, Ill.)--Football  American Football Coaches Proceedings, "Offensive and Defensive Plans of Rose Bowl Game"  Folder 1  1949  1  1  Clippings from Northwestern University Publications  Folder 2  1948-9  1  2  Clippings from Non-Northwestern University Publications  Folder 3  1948-9  1  3  Clippings from Non-Northwestern University Publications  Folder 4  1948-9  1  4  Clippings from Non-Northwestern University Publications  Folder 5  1948-2009  1  5  Financial Documents  Folder 6  1948-9  1  6  Northwestern University Marching Band  Folder 7  1949  1  7  Northwestern University Marching Band Telegram  Folder 8  1949  1  8  Railway Ephemera  Folder 9  1948-9  1  9  Reunions  Folder 10  1974-84  1  10  Rose Bowl Tickets  Folder 11  1949  1  11  Rose Bowl Program  Folder 12  1949  1  12  Rose Bowl Program  Folder 13  1949  1  13  Rose Bowl Program  Folder 1  1949  2  1  Rose Bowl Program  Folder 2  1949  2  2  Rose Bowl Program  Folder 3  1949  2  3  Rose Bowl Reference Sources  Folder 4  1949-2008  2  4  Tournament of Roses  Folder 5  1949  2  5  Tournament of Roses Tickets  Folder 6  1949  2  6  </note>
+	<relatedItem type="host">
+		<titleInfo>
+			<title>Northwestern University Library Archival and Manuscript Collections</title>
+		</titleInfo>
+	</relatedItem>
+</mods>

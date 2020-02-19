@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JSON>
+  <id>6h440s71x</id>
+  <member-of-collections type="array"/>
+  <thumbnail-id nil="true"/>
+  <create-date>2019-05-28T14:51:13.666+00:00</create-date>
+  <modified-date>2019-05-29T20:08:44.290+00:00</modified-date>
+  <head type="array">
+    <head>
+      <id>http://fcrepo.stack.vpc.rdc.library.northwestern.edu/rest/nuf/6h/44/0s/71/6h440s71x/list_source#g70180134982540</id>
+    </head>
+  </head>
+  <tail type="array">
+    <tail>
+      <id>http://fcrepo.stack.vpc.rdc.library.northwestern.edu/rest/nuf/6h/44/0s/71/6h440s71x/list_source#g70180134982540</id>
+    </tail>
+  </tail>
+  <depositor>cpd3149</depositor>
+  <title type="array">
+    <title>African Governance and Collaborative Learning: Confronting Predation, Poverty, and Conflict</title>
+  </title>
+  <date-uploaded>2019-05-28T14:51:13.603+00:00</date-uploaded>
+  <date-modified>2019-05-29T20:08:26.761+00:00</date-modified>
+  <state>
+    <id>http://fedora.info/definitions/1/0/access/ObjState#active</id>
+  </state>
+  <proxy-depositor nil="true"/>
+  <on-behalf-of>raj172</on-behalf-of>
+  <arkivo-checksum nil="true"/>
+  <owner nil="true"/>
+  <doi>doi:10.21985/N2SZ09</doi>
+  <label nil="true"/>
+  <relative-path nil="true"/>
+  <import-url nil="true"/>
+  <resource-type type="array">
+    <resource-type>Research Paper</resource-type>
+  </resource-type>
+  <creator type="array">
+    <creator>Richard Joseph</creator>
+  </creator>
+  <contributor type="array"/>
+  <description type="array">
+    <description>In this talk and related activities, I hope to inspire others to take up one of the greatest challenges of our era: narrowing the governance gap which is at the root of many of Africa’s development and security dilemmas. In view of the emergence of many fragile and failed states, a wave of innovative thinking and action is urgently needed. According to Roger Myerson, Nobel Laureate in Economics, “the key question in Africa is how can governance be improved”. Answers will only be found, I believe, through a process of collaborative learning and research. No single scholar or analyst can unravel the complex dimensions of this issue in Africa’s diverse contexts. The engagement of the Academy in meeting this challenge is vital. An invitation to review a strategy document on economic governance for 2019-2013 of a major African organization has added to the uniqueness of this moment.</description>
+  </description>
+  <keyword type="array">
+    <keyword>collaborative learning initiative</keyword>
+  </keyword>
+  <license type="array"/>
+  <rights-statement type="array">
+    <rights-statement>http://rightsstatements.org/vocab/InC/1.0/</rights-statement>
+  </rights-statement>
+  <publisher type="array"/>
+  <date-created type="array">
+    <date-created>2019-05-28</date-created>
+  </date-created>
+  <subject type="array"/>
+  <language type="array"/>
+  <identifier type="array"/>
+  <based-near type="array"/>
+  <related-url type="array"/>
+  <bibliographic-citation type="array"/>
+  <source type="array"/>
+  <version>W/"b0a0c4dcfac77b4f2b498c79b112494d35c262a3"</version>
+</JSON>
