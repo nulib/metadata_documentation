@@ -47,6 +47,12 @@ xmlns="http://www.loc.gov/mods/v3">
 		<xsl:call-template name="relatedItem"/>
 		<xsl:call-template name="allElse"/>
 		
+		<relatedItem type="host" otherType="sourceSystem">	
+			<titleInfo><title>
+				<xsl:text>Digital Collections Images Repository</xsl:text>
+			</title></titleInfo>
+		</relatedItem>
+			
 		</mods>
 	
 	</xsl:template>
