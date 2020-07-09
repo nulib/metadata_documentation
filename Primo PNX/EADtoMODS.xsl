@@ -14,13 +14,14 @@ xmlns="http://www.loc.gov/mods/v3"
 <!--ArchivesSpace is not exporting a URL; this has to be manually added to either the EAD, MODS or PNX-->
 <!--Note that ArchivesSpace does not export the <bioghist> associated with an Agent record. This was exported from Archon, so this is a loss of information in the full text search capability of the PNX-->
 
-<!--For use outside NUL, update the template named recordInfo to put in your institution's MARC code or something like it-->
-
 <!--The eadid@URL value must be manually added to the EAD on export as of March 2017-->
     
 <xsl:output method="xml" indent="yes" omit-xml-declaration="no"  media-type="text/xml" encoding="utf-8"/>
 <xsl:strip-space elements="*"/>
 <xsl:variable name="collection_name">Northwestern University Library Archival and Manuscript Collections</xsl:variable>
+
+<!--If the finding aid is not published, then it should produce no MODS-->
+<xsl:template match="ead:ead[@audience='internal']"/>
 
 <xsl:template match="*">
 	<mods xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/mods/v3" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd">
@@ -49,26 +50,27 @@ xmlns="http://www.loc.gov/mods/v3"
 	</mods>
 </xsl:template>
 
-<!--If the finding aid is not published, then it should produce no EAD-->
-<xsl:template match="ead:ead[ead:archdesc/@audience='internal']">
+<!--If the finding aid is not published, then it should produce no MODS-->
+<!--xsl:template match="ead:ead[@audience='internal']">
 	<titleInfo><title>This finding aid is not public.</title></titleInfo>
-</xsl:template> 	
+</xsl:template--> 	
 			
 <!--titleInfo section-->
 <xsl:template name="titleInfo">
 	<titleInfo>
 		<title>
-			<!--select the titleproper that does not have @type='filing' and only select the text in it, not the subordinate <num> element-->
-			<xsl:choose><!--This choose condition was put in place for finding aids that have <emph> elements in the title, but it does not work for finding aids that have a <num> value that appears in the title, which applies to nearly all Music finding aids!-->
+			<xsl:variable name="title" select="normalize-space(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')])"/>
+				
+				<!--select the titleproper that does not have @type='filing' and only select the text in it, not the subordinate <num> element-->
+			<xsl:choose>
 				<xsl:when test="ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num">
-					<!--xsl:value-of select="normalize-space(substring-before(normalize-space(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]), ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num))"/-->			
-					<xsl:value-of select="normalize-space(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/text())"/>			
-					<!--xsl:value-of select="normalize-space(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')])"/-->								
+						<xsl:value-of select="substring($title, 1, string-length($title)-string-length(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num)-1)"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="normalize-space(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/text())"/>			
+					<xsl:value-of select="$title"/>
 				</xsl:otherwise>
 			</xsl:choose>
+				
 			<xsl:if test="ead:archdesc/ead:did/ead:unittitle/ead:unitdate">
 				<xsl:text>, </xsl:text>
 				<xsl:choose>
@@ -242,7 +244,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		<form authority="marcform">print</form>
 		<internetMediaType>text/xml</internetMediaType>
 		<digitalOrigin>born digital</digitalOrigin>
-		<extent>
+		<extent>	<!--xsl:value-of select=ead:archdesc/ead:did/ead:physdesc/ead:extent"/-->
 			<xsl:for-each select="ead:archdesc/ead:did/ead:physdesc/ead:extent">
 				<xsl:choose>
 					<xsl:when test="preceding-sibling::ead:extent">
@@ -407,7 +409,7 @@ xmlns="http://www.loc.gov/mods/v3"
 <!--subjects--><!--Note that this only uses subject headings from the collection description (the <archdesc>); subject headings for components are not included.-->
 <xsl:template name="subjects">
 
-	<!--xsl:for-each select="//ead:controlaccess//ead:persname"--><!--Use this commented out code to include all subject headings, including those at the component levels.-->
+	<!--xsl:for-each select="//ead:controlaccess//ead:persname"--><!--Use this to include all subject headings, including those at the component levels.-->
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:persname">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
@@ -419,7 +421,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		</subject>
 	</xsl:for-each>
 
-	<!--xsl:for-each select="//ead:controlaccess//ead:famname"--><!--Use this commented out code to include all subject headings, including those at the component levels.-->
+	<!--xsl:for-each select="//ead:controlaccess//ead:famname"--><!--Use this to include all subject headings, including those at the component levels.-->
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:famname">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
@@ -431,7 +433,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		</subject>
 	</xsl:for-each>
 
-	<!--xsl:for-each select="//ead:controlaccess//ead:corpname"--><!--Use this commented out code to include all subject headings, including those at the component levels.-->
+	<!--xsl:for-each select="//ead:controlaccess//ead:corpname"--><!--Use this to include all subject headings, including those at the component levels.-->
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:corpname">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
@@ -443,7 +445,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		</subject>
 	</xsl:for-each>
 
-	<!--xsl:for-each select="//ead:controlaccess//ead:title"--><!--Use this commented out code to include all subject headings, including those at the component levels.-->
+	<!--xsl:for-each select="//ead:controlaccess//ead:title"--><!--Use this to include all subject headings, including those at the component levels.-->
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:title">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
@@ -452,7 +454,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		</subject>
 	</xsl:for-each>
 
-	<!--xsl:for-each select="//ead:controlaccess//ead:subject[.!='N/A']"--><!--Use this commented out code to include all subject headings, including those at the component levels.-->
+	<!--xsl:for-each select="//ead:controlaccess//ead:subject[.!='N/A']"--><!--Use this to include all subject headings, including those at the component levels.-->
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:subject[.!='N/A']">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
@@ -463,7 +465,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		</subject>
 	</xsl:for-each>
 
-	<!--xsl:for-each select="//ead:controlaccess//ead:geogname[.!='N/A']"--><!--Use this commented out code to include all subject headings, including those at the component levels.-->
+	<!--xsl:for-each select="//ead:controlaccess//ead:geogname[.!='N/A']"--><!--Use this to include all subject headings, including those at the component levels.-->
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:geogname[.!='N/A']">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
@@ -474,7 +476,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		</subject>
 	</xsl:for-each>	
 
-	<!--xsl:for-each select="//ead:controlaccess//ead:genreform"--><!--Use this commented out code to include all subject headings, including those at the component levels.-->
+	<!--xsl:for-each select="//ead:controlaccess//ead:genreform"--><!--Use this to include all subject headings, including those at the component levels.-->
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:genreform">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
@@ -485,7 +487,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		</subject>
 	</xsl:for-each>	
 	
-	<!--xsl:for-each select="//ead:controlaccess//ead:name"--><!--Use this commented out code to include all subject headings, including those at the component levels.-->
+	<!--xsl:for-each select="//ead:controlaccess//ead:name"--><!--Use this to include all subject headings, including those at the component levels.-->
 	<xsl:for-each select="//ead:controlaccess//ead:name">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
@@ -522,7 +524,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		<recordContentSource authority="marcorg">IEN</recordContentSource><!--NUL specific MARC code-->
 		<recordCreationDate encoding="marc"><xsl:value-of select="ead:eadheader/ead:profiledesc/ead:creation/ead:date"/></recordCreationDate>
 		<recordChangeDate encoding="iso8601"><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001][M01][D01][H01][m01][s01]')"/>.0</recordChangeDate>
-		<recordIdentifier source="IEN"><!--NUL specific MARC code-->
+		<recordIdentifier source="IEN">
 			<xsl:choose>
 				<xsl:when test="ead:eadheader/ead:eadid/@identifier">
 					<xsl:value-of select="ead:eadheader/ead:eadid/@identifier"/>
@@ -552,7 +554,7 @@ xmlns="http://www.loc.gov/mods/v3"
 <!--This works, but not quite. It pulls in the internal elements as well as the rest; clearly the "when" test is failing and the internal elements end up in the note for indexing.-->
 <xsl:template name="allElse">
 	<xsl:choose>
-		<xsl:when test="@audience='internal'"><!--//*[@audience='internal'] selects ALL of the elements. *[@audience='internal'] selects none of them--><!--N.B.: THIS CODE DOES NOT WORK!-->
+		<xsl:when test="@audience='internal'"><!--//*[@audience='internal'] selects ALL of the elements. *[@audience='internal'] selects none of them-->
 			<note type="excluded"><xsl:value-of select="//ead:*[@audience='internal']/descendant-or-self::text()"/></note>
 		</xsl:when>
 		<xsl:otherwise>
