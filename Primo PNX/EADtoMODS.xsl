@@ -145,6 +145,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:param name="type"/>
 	<name type="{$type}">
 	<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
+	<xsl:if test="@authfilenumber"><xsl:attribute name="authorityURI"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 	<xsl:choose>
 		<xsl:when test="$role!=''"><role><roleTerm type="text"><xsl:value-of select="$role"/></roleTerm></role></xsl:when>
 		<xsl:when test="@role"><role><roleTerm type="text"><xsl:value-of select="@role"/></roleTerm></role></xsl:when>
@@ -413,7 +414,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:persname">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
-			<xsl:if test="@id"><xsl:attribute name="ID"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+			<xsl:if test="@authfilenumber"><xsl:attribute name="authorityURI"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 			<name type="personal">
 				<namePart><xsl:value-of select="normalize-space(.)"/></namePart>
 				<displayForm><xsl:value-of select="normalize-space(.)"/></displayForm>
@@ -425,7 +426,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:famname">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
-			<xsl:if test="@id"><xsl:attribute name="ID"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+			<xsl:if test="@authfilenumber"><xsl:attribute name="ID"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 			<name type="family">
 				<namePart><xsl:value-of select="normalize-space(.)"/></namePart>
 				<displayForm><xsl:value-of select="normalize-space(.)"/></displayForm>
@@ -437,7 +438,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:corpname">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
-			<xsl:if test="@id"><xsl:attribute name="ID"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+			<xsl:if test="@authfilenumber"><xsl:attribute name="ID"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 			<name type="corporate">
 				<namePart><xsl:value-of select="normalize-space(.)"/></namePart>
 				<displayForm><xsl:value-of select="normalize-space(.)"/></displayForm>
@@ -449,7 +450,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:title">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
-			<xsl:if test="@id"><xsl:attribute name="ID"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+			<xsl:if test="@authfilenumber"><xsl:attribute name="ID"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 				<titleInfo><title><xsl:value-of select="normalize-space(.)"/></title></titleInfo>
 		</subject>
 	</xsl:for-each>
@@ -458,7 +459,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:subject[.!='N/A']">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
-			<xsl:if test="@id"><xsl:attribute name="ID"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+			<xsl:if test="@authfilenumber"><xsl:attribute name="ID"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 			<topic>
 				<xsl:value-of select="."/>
 			</topic>
@@ -469,7 +470,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:geogname[.!='N/A']">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
-			<xsl:if test="@id"><xsl:attribute name="ID"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+			<xsl:if test="@authfilenumber"><xsl:attribute name="ID"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 			<geographic>
 				<xsl:value-of select="."/>
 			</geographic>
@@ -480,7 +481,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:for-each select="ead:archdesc/ead:controlaccess//ead:genreform">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
-			<xsl:if test="@id"><xsl:attribute name="ID"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+			<xsl:if test="@authfilenumber"><xsl:attribute name="ID"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 			<genre>
 				<xsl:value-of select="."/>
 			</genre>
@@ -491,7 +492,7 @@ xmlns="http://www.loc.gov/mods/v3"
 	<xsl:for-each select="//ead:controlaccess//ead:name">
 		<subject>
 			<xsl:if test="@source"><xsl:attribute name="authority"><xsl:value-of select="@source"/></xsl:attribute></xsl:if>
-			<xsl:if test="@id"><xsl:attribute name="ID"><xsl:value-of select="@id"/></xsl:attribute></xsl:if>
+			<xsl:if test="@authfilenumber"><xsl:attribute name="ID"><xsl:value-of select="@authfilenumber"/></xsl:attribute></xsl:if>
 			<name>
 				<namePart><xsl:value-of select="."/></namePart>
 				<displayForm><xsl:value-of select="."/></displayForm>
