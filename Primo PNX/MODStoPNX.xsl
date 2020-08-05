@@ -457,17 +457,22 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 		<xsl:choose>
 <!--If there is a missing extent in the EAD, the MODS physicalDescription/extent element will be "NaN". Just skip pnx:format if that's the case.-->
 			<xsl:when test="mods:extent != 'NaN ' and mods:extent != ''">
-			<format>
-				<xsl:value-of select="normalize-space(mods:extent)"/>
-			</format>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:if test="mods:note[@type]">
 				<format>
-				<xsl:value-of select="mods:note[@type!='leaf']"/>
+					<xsl:for-each select="mods:extent">
+						<xsl:if test="preceding-sibling::mods:extent">
+							<xsl:text>, </xsl:text>
+						</xsl:if>
+						<xsl:value-of select="normalize-space(.)"/>
+					</xsl:for-each>
 				</format>
-			</xsl:if>
-		</xsl:otherwise>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:if test="mods:note[@type]">
+					<format>
+					<xsl:value-of select="mods:note[@type!='leaf']"/>
+					</format>
+				</xsl:if>
+			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 	
