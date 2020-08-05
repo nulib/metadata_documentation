@@ -245,22 +245,23 @@ xmlns="http://www.loc.gov/mods/v3"
 		<form authority="marcform">print</form>
 		<internetMediaType>text/xml</internetMediaType>
 		<digitalOrigin>born digital</digitalOrigin>
-		<extent>	<!--xsl:value-of select=ead:archdesc/ead:did/ead:physdesc/ead:extent"/-->
-			<xsl:for-each select="ead:archdesc/ead:did/ead:physdesc/ead:extent">
-				<xsl:choose>
-					<xsl:when test="preceding-sibling::ead:extent">
+		<xsl:for-each select="ead:archdesc/ead:did/ead:physdesc">
+			<extent>
+				<xsl:for-each select="ead:extent">
+					<xsl:choose>
+						<xsl:when test="preceding-sibling::ead:extent">
 							<xsl:text> (</xsl:text>
 							<xsl:value-of select="."/>
 							<xsl:text>)</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="."/>
-					</xsl:otherwise>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="."/>
+						</xsl:otherwise>
 					</xsl:choose>
-			</xsl:for-each>
-			
-			
-		</extent>
+				</xsl:for-each>
+			</extent>
+		</xsl:for-each>
+		
 		<xsl:for-each select="ead:archdesc/ead:did/ead:physdesc/ead:dimensions">
 			<note>
 				<xsl:attribute name="displayLabel">
