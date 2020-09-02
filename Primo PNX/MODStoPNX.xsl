@@ -1195,6 +1195,9 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 			<xsl:if test=". ='software, multimedia'">
 				<xsl:text>other</xsl:text>
 			</xsl:if>
+			<xsl:if test=". ='other'">
+				<xsl:text>other</xsl:text>
+			</xsl:if>
 		</xsl:variable>
 		<xsl:value-of select="$Type"/>
 	</xsl:template>
