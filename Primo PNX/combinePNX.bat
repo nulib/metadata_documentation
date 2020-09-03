@@ -1,0 +1,1 @@
+for %%f in (September2020\*.pnx) do (type %%f >>findingAids20200903.xml)
