@@ -1,0 +1,17 @@
+GET DATA
+  /TYPE=ODBC
+  /CONNECT='DSN=ArchivesSpace Production;'
+  /SQL='SELECT distinct T0.id as `resourceID`, T0.repo_id, T10.repo_code as `repository`, T0.title as `resourceTitle`,  '+
+    'T0.identifier, T0.created_by as `resourceCreated_by`, T0.last_modified_by as `resourceModified_by`, '+
+    ' T0.create_time as `resourceCreate_time`, T0.system_mtime as `systemModify_time`, T0.user_mtime as `resourceModify_time`, '
+    ' MAX(T1.user_mtime) as `componentModify_time`, MAX(T1.last_modified_by) as `componentModified_by`, '
+    ' T0.suppressed as `resourceSuppressed`, T0.publish as `resourcePublished`, T0.ead_id, T0.ead_location '+    
+    ' FROM archivesspace.resource T0 '+
+    ' LEFT OUTER JOIN archivesspace.archival_object T1 ' 
+    ' ON T0.ID=T1.root_record_id ' +
+    ' JOIN archivesspace.repository T10' 
+    ' ON T0.repo_id=T10.id  '+
+     ' WHERE ((T0.user_mtime >= "2020-8-01" OR T0.system_mtime >= "2020-7-31" OR T1.user_mtime >= "2020-08-01") ' +
+     ' AND (T0.Suppressed=0 AND T0.Publish=1)) '
+    ' GROUP BY resourceID '
+   /ASSUMEDSTRWIDTH=255.
