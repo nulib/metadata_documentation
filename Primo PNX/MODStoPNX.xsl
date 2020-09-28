@@ -8,14 +8,13 @@ This stylesheet has been developed for use with the Northwestern University Libr
  (derived from their original source records in EAD), the Image Repository collection of Transportation Library photographs, and the
 Winterton Collection of East African Photographs.
 It is copied from the MODS to DC crosswalk at http://www.loc.gov/standards/mods/MODS3-22simpleDC.xsl.
-Edited by Karen Miller to meet the needs of NUL.	
-Search on "01NWU" to find information that is hard coded into the PNX-->
-
+Edited by Karen Miller to meet the needs of NUL.	-->
+<!--updated Aug. 5, 2020 to accommodate multiple Extent sub-records-->
 
 <!--20170505: changed @encoding below from UTF-8 to us-ascii to deal with diacritics-->
 	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="us-ascii" media-type="text/xml"/>	
 	<xsl:strip-space elements="*"/>
-	<!--xsl:variable name="collection_name" select="mods:mods/mods:relatedItem[@type='host']/mods:titleInfo/mods:title"/--><!--Use this line if you want to hard code in a collection name-->
+	<!--xsl:variable name="collection_name" select="mods:mods/mods:relatedItem[@type='host']/mods:titleInfo/mods:title"/-->
 
 	
 	<xsl:template match="/">
@@ -27,6 +26,8 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 			</xsl:variable>			
 
 			<record>
+			
+			<xsl:if test="not(contains($collection_name, 'Cordwell'))"><!--Remove this and the corresponding closing tag once the Cordwell collection is gone!-->
 			
 				<control>
 					<xsl:apply-templates mode="control"/>
@@ -74,7 +75,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 					<addtitle>
 						<xsl:value-of select="$collection_name"/>
 					</addtitle>
-					<addttle>Northwestern University Library (Evanston, Ill.)</addttle><!--01NWU: change this to suit local search needs-->
+					<addttle>Northwestern University Library (Evanston, Ill.)</addttle>
 				</search>
 					<sort>
 					<xsl:apply-templates mode="sort"/>
@@ -103,6 +104,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 				<dedup>
 					<xsl:apply-templates mode="dedup"/>
 				</dedup>
+</xsl:if>				
 				
 			</record>
 		</xsl:for-each>
@@ -356,7 +358,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 	<!--The mapping below could easily be de-activated or expanded. This may be desirable for records that did not originate as MARC.-->
 	<xsl:template match="mods:note[not(@type='statement of responsibility') and not(@type='for indexing only')]" mode="display">
 		<!--xsl:if test="$collection_name!='Northwestern University Library Archival and Manuscript Collections'"-->
-		<xsl:if test="../mods:relatedItem[@type='host']/mods:titleInfo/mods:title!='Northwestern University Library Archival and Manuscript Collections'"><!--01NWU: change this to suit local display needs-->
+		<xsl:if test="../mods:relatedItem[@type='host']/mods:titleInfo/mods:title!='Northwestern University Library Archival and Manuscript Collections'">
 			<description>
 				<xsl:value-of select="normalize-space(.)"/>
 			</description>
@@ -368,7 +370,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 			<xsl:value-of select="normalize-space(.)"/>
 		</description>
 	</xsl:template>
-	<xsl:template match="mods:note[not(@type='statement of responsibility')]" mode="search">
+	<xsl:template match="mods:note[not(@type='statement of responsibility')]" mode="search"><!--Changed from Description-->
 		<lds06>
 			<xsl:value-of select="."/>
 		</lds06>
@@ -397,6 +399,10 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 					</xsl:choose>
 				</xsl:for-each>
 				<xsl:choose>
+					<!--Override the publisher for University Archives & Charles Deering McCormick Library of Special Collections-->
+					<xsl:when test="contains(., 'Charles Deering McCormick Library of Special Collections') or contains(., 'Northwestern University Archives')">
+						<xsl:text>McCormick Library of Special Collections and University Archives</xsl:text>
+					</xsl:when>
 					<xsl:when test="ends-with(.,',')">
 						<xsl:value-of select="substring-before(., ',')"/>
 					</xsl:when>
@@ -404,9 +410,10 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 						<xsl:value-of select="normalize-space(.)"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				
 			</publisher>
 		</xsl:for-each>
-		<!--Removed for finding aids, which aren't published-->
+		
 		<xsl:choose>
 			<xsl:when test="../mods:genre='finding aid'"/>
 			<xsl:otherwise>
@@ -427,6 +434,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 	</xsl:template>
 	
 <!--Publisher (more)-->
+	<!--This matches the NUL Voyager mapping-->
 	<xsl:template match="mods:note[@type='thesis']" mode="display">
 		<publisher>
 			<xsl:value-of select="normalize-space(.)"/>
@@ -723,7 +731,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 	</xsl:template>
 
 <!--AvailLibrary-->
-	<xsl:template match="mods:location" mode="display"><!--01NWU: change this to suit local display needs-->
+	<xsl:template match="mods:location" mode="display">
 		<xsl:if test="mods:physicalLocation | mods:shelfLocator | mods:holdingExternal">
 			<lds18>
 				<xsl:choose>
@@ -891,7 +899,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 				<!--xsl:when test="@collection='yes'">
 					<xsl:text>other</xsl:text>
 				</xsl:when-->
-				<xsl:when test=".='text' or .='book'">
+				<xsl:when test=".='text'">
 					<xsl:choose>
 						<xsl:when test="../mods:originInfo/mods:issuance='monographic'">
 							<xsl:text>books</xsl:text>
@@ -905,6 +913,9 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 					</xsl:choose>
 				</xsl:when>
 			</xsl:choose>
+			<xsl:if test=".='book'">
+				<xsl:text>books</xsl:text>
+			</xsl:if>
 			<xsl:if test=".='cartographic'">
 				<xsl:text>maps</xsl:text>
 			</xsl:if>
@@ -933,6 +944,9 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 				<xsl:text>others</xsl:text>
 			</xsl:if>
 			<xsl:if test=". ='software, multimedia'">
+				<xsl:text>other</xsl:text>
+			</xsl:if>
+			<xsl:if test=". ='other'">
 				<xsl:text>other</xsl:text>
 			</xsl:if>
 		</xsl:variable>
@@ -964,7 +978,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 	
 	
 <!--Library-->
-		<xsl:template match="mods:location[mods:physicalLocation]" mode="facets"><!--01NWU: change this to suit local facet needs-->
+		<xsl:template match="mods:location[mods:physicalLocation]" mode="facets">
 			<library>
 				<xsl:choose>
 					<xsl:when test="contains(mods:physicalLocation,'Galter')">
@@ -1151,7 +1165,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 				<!--xsl:when test="@collection='yes'">
 					<xsl:text>other</xsl:text>
 				</xsl:when-->
-				<xsl:when test=".='text' or .='book'">
+				<xsl:when test=".='text'">
 					<xsl:choose>
 						<xsl:when test="../mods:originInfo/mods:issuance='monographic'">
 							<xsl:text>book</xsl:text>
@@ -1165,6 +1179,9 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 					</xsl:choose>
 				</xsl:when>
 			</xsl:choose>
+			<xsl:if test=".='book'">
+				<xsl:text>book</xsl:text>
+			</xsl:if>
 			<xsl:if test=".='cartographic'">
 				<xsl:text>map</xsl:text>
 			</xsl:if>
@@ -1202,7 +1219,7 @@ Search on "01NWU" to find information that is hard coded into the PNX-->
 		<xsl:value-of select="$Type"/>
 	</xsl:template>
 
-	<xsl:template name="creationdate">
+<xsl:template name="creationdate">
 		<xsl:param name="appendtext"/>
 		<xsl:if test="mods:dateIssued | mods:dateCreated">
 			<creationdate>
