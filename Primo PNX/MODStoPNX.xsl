@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
 xmlns:mods="http://www.loc.gov/mods/v3" exclude-result-prefixes="mods" 
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
@@ -370,12 +371,89 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 			<xsl:value-of select="normalize-space(.)"/>
 		</description>
 	</xsl:template>
-	<xsl:template match="mods:note[not(@type='statement of responsibility')]" mode="search"><!--Changed from Description-->
+	
+	
+	<!--xsl:template match="mods:note[not(@type='statement of responsibility')]" mode="search">
 		<lds06>
 			<xsl:value-of select="."/>
 		</lds06>
+	</xsl:template-->
+	
+	<!--Changed 1. to split lds06 into smaller chunks for Primo VE and 2. to pull only from mods:note@type='for indexing only' /kdm Oct. 30, 2020-->
+	<!--this works nicely with small files, but crashes with a stack overflow for larger ones-->
+	<!--xsl:template match="mods:note[@type='for indexing only']" mode="search">
+		<xsl:call-template name="wordwrap">
+			<xsl:with-param name="string">
+				<xsl:value-of select="normalize-space(.)"/>
+			</xsl:with-param>
+			<xsl:with-param name="start" select="1"/>
+		</xsl:call-template>
 	</xsl:template>
 
+	<xsl:template name="wordwrap">
+		<xsl:param name="string"/>
+		<xsl:param name="start"/>
+		<xsl:param name="line-length" select="37850"/>
+    
+		<xsl:variable name="line" select="normalize-space(substring-before($string, tokenize(substring($string, $start, $line-length), '\s+')[last()]))"/>
+		<xsl:variable name="rest" select="normalize-space(substring($string, string-length($line)+1))"/>
+		
+		<xsl:if test="$line">
+			<lds06>
+			   <xsl:value-of select="$line"/>
+			</lds06>
+		</xsl:if>
+    
+    	<xsl:choose>
+			<xsl:when test="string-length($rest) gt $line-length">
+				<xsl:call-template name="wordwrap">
+					<xsl:with-param name="string" select="$rest"/>
+					<xsl:with-param name="start" select="string-length($line)+1"/>
+				</xsl:call-template>
+			 </xsl:when>
+			 <xsl:when test="string-length($rest) lt $line-length and string-length($rest) gt 0">
+				<lds06>
+					<xsl:value-of select="$rest"/>
+				</lds06>
+			 </xsl:when>		   
+		</xsl:choose>
+    </xsl:template-->
+
+<!--Changed 1. to split lds06 into smaller chunks for Primo VE and 2. to pull only from mods:note@type='for indexing only' /kdm Oct. 30, 2020-->
+	<xsl:template match="mods:note[@type='for indexing only']" mode="search">
+		<xsl:variable name="i">
+			<xsl:value-of select="(string-length(normalize-space(.)) idiv 37850)"></xsl:value-of>
+		</xsl:variable>
+		<xsl:variable name="line-length" select="37850"/>
+		<xsl:variable name="string" select="normalize-space(.)"/>
+		
+			<xsl:choose>
+				<xsl:when test="$i=0">
+					<lds06>
+						<xsl:value-of select="$string"></xsl:value-of>
+					</lds06>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:for-each select="0 to $i">
+						<xsl:variable name="start" select="(.*$line-length)+1"/>
+																												
+						<lds06>
+							<xsl:value-of select="substring($string, $start, $line-length)"/>
+						</lds06>
+						<!--this is a kludgy way to get a split word into the text search field. It does not solve the problem of quoted string searching-->
+						<xsl:if test="not(ends-with(substring($string, $start, $line-length), ' ')) and not(substring($string, ((.+1)*$line-length)+1) eq ' ') and not(.=$i)">
+							<lds06>
+								<xsl:value-of select="tokenize(substring($string, $start, $line-length), '\s+')[last()]"></xsl:value-of>
+								<xsl:value-of select="substring-before(substring($string, ((.+1)*$line-length)+1, $line-length), ' ')"/>
+							</lds06>
+						</xsl:if>
+				</xsl:for-each>
+			</xsl:otherwise>
+		</xsl:choose>
+				
+	</xsl:template>
+
+	
 	<!--Edition, Publisher, Creationdate for Display-->
 	<xsl:template match="mods:originInfo" mode="display">
 		<xsl:if test="mods:edition">
@@ -685,7 +763,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 		</relation>
 	</xsl:template>
 	
-<!--isPartOf-->
+<!--isPartOf--><!--Added a test to see if there are multiple Collection names, since this element displays all on one line in Primo/kdm Oct. 30, 2020-->
 	<xsl:template match="mods:relatedItem[@type='host']" mode="display">
 		<ispartof>
 			<!--xsl:for-each select="mods:titleInfo/mods:* | mods:name/mods:namePart">
@@ -695,8 +773,8 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 				</xsl:if>
 			</xsl:for-each-->
 			<!--xsl:value-of select="$collection_name"/-->
-			<!--xsl:value-of select="mods:titleInfo/mods:title"/--><!--20190827: changed this to replace semi-colons with commas, since semi-colons tell the display to split the field-->
-			<xsl:value-of select="replace(mods:titleInfo/mods:title, ';', ',')"/>
+			<!--xsl:value-of select="mods:titleInfo/mods:title"/--><!--20190827: changed this to replace semi-colons with commas, since semi-colons tell the display to split the field-->		<xsl:if test="preceding-sibling::mods:relatedItem[@type='host']/mods:titleInfo/mods:title">, </xsl:if>
+				<xsl:value-of select="replace(mods:titleInfo/mods:title, ';', ',')"/>
 		</ispartof>
 	</xsl:template>
 	
