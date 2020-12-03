@@ -764,6 +764,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 	</xsl:template>
 	
 <!--isPartOf--><!--Added a test to see if there are multiple Collection names, since this element displays all on one line in Primo/kdm Oct. 30, 2020-->
+<!--Removed the test to add a preceding comma if there are multiple Collection names, as Primo VE is displaying them on two lines in detailed results and separates them with a semi-colon in the brief results-->
 	<xsl:template match="mods:relatedItem[@type='host']" mode="display">
 		<ispartof>
 			<!--xsl:for-each select="mods:titleInfo/mods:* | mods:name/mods:namePart">
@@ -773,7 +774,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 				</xsl:if>
 			</xsl:for-each-->
 			<!--xsl:value-of select="$collection_name"/-->
-			<!--xsl:value-of select="mods:titleInfo/mods:title"/--><!--20190827: changed this to replace semi-colons with commas, since semi-colons tell the display to split the field-->		<xsl:if test="preceding-sibling::mods:relatedItem[@type='host']/mods:titleInfo/mods:title">, </xsl:if>
+			<!--xsl:value-of select="mods:titleInfo/mods:title"/--><!--20190827: changed this to replace semi-colons with commas, since semi-colons tell the display to split the field-->		<!--xsl:if test="preceding-sibling::mods:relatedItem[@type='host']/mods:titleInfo/mods:title">, </xsl:if-->
 				<xsl:value-of select="replace(mods:titleInfo/mods:title, ';', ',')"/>
 		</ispartof>
 	</xsl:template>
