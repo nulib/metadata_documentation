@@ -140,6 +140,8 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 		<sourcesystem>
 			<xsl:call-template name="sourcesystem"/>
 		</sourcesystem>
+		<!-- Removing Jan. 20, 2021 as we're not using this. It can be added back later if needed-->
+		<!--
 		<colldiscovery>
 			<xsl:choose>
 				<xsl:when test="mods:recordInfoNote='collection'">
@@ -155,7 +157,10 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 			</xsl:choose>
 			<xsl:text>$$I01NWU</xsl:text>
 		</colldiscovery>
+-->
+
 	</xsl:template>
+
 
 	
 <!--Control section from Winterton MODS-->
@@ -709,14 +714,14 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 
 	<xsl:template match="mods:relatedItem[@type='series'][1]" mode="display" >
 		<relation>
-			<xsl:text>$$Cseries $$V</xsl:text>
+			<xsl:text>series </xsl:text>
 			<xsl:apply-templates select="//mods:relatedItem[@type='series']" mode="series"/>
 		</relation>
 	</xsl:template>
 	
 	<xsl:template match="mods:relatedItem[@type='constituent']" mode="display" >
 		<relation>
-			<xsl:text>$$Cincludes $$V</xsl:text>
+			<xsl:text>includes </xsl:text>
 			<xsl:for-each select="mods:titleInfo/mods:*">
 				<xsl:if test="normalize-space(.)!= ''">
 					<xsl:value-of select="normalize-space(.)"/>
@@ -732,28 +737,28 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 		<relation>
 			<xsl:choose>
 				<xsl:when test="@type='preceding'">
-					<xsl:text>$$Cpreceding: $$V</xsl:text>
+					<xsl:text>preceding: </xsl:text>
 				</xsl:when>
 				<xsl:when test="@type='succeeding'">
-					<xsl:text>$$Csucceeding: $$V</xsl:text>
+					<xsl:text>succeeding: </xsl:text>
 				</xsl:when>
 				<xsl:when test="@type='original'">
-					<xsl:text>$$Coriginal: $$V</xsl:text>
+					<xsl:text>original: </xsl:text>
 				</xsl:when>
 				<xsl:when test="@type='otherVersion'">
-					<xsl:text>$$Cother version: $$V</xsl:text>
+					<xsl:text>other version: </xsl:text>
 				</xsl:when>
 				<xsl:when test="@type='otherFormat'">
-					<xsl:text>$$Cother format: $$V</xsl:text>
+					<xsl:text>other format: </xsl:text>
 				</xsl:when>
 				<xsl:when test="@type='isReferencedBy'">
-					<xsl:text>$$Cis referenced by: $$V</xsl:text>
+					<xsl:text>is referenced by: </xsl:text>
 				</xsl:when>
 				<xsl:when test="@type='references'">
-					<xsl:text>$$Creferences: $$V</xsl:text>
+					<xsl:text>references: </xsl:text>
 				</xsl:when>
 				<xsl:when test="@type='reviewOf'">
-					<xsl:text>$$Creview of: $$V</xsl:text>
+					<xsl:text>review of: </xsl:text>
 				</xsl:when>
 			</xsl:choose>
 			<xsl:for-each select="mods:titleInfo/mods:* | mods:identifier">
@@ -815,12 +820,12 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 			<lds18>
 				<xsl:choose>
 					<xsl:when test="contains(mods:physicalLocation,'Galter')">
-						<xsl:text>$$LGalter Health Sciences Library (Chicago)</xsl:text>
-						<xsl:text>$$1Galter Health Sciences Library: Special Collections</xsl:text>
+						<xsl:text>Galter Health Sciences Library (Chicago)</xsl:text>
+						<xsl:text>Galter Health Sciences Library: Special Collections</xsl:text>
 					</xsl:when>
 					<xsl:when test="contains(mods:physicalLocation,'Pritzker')">
-						<xsl:text>$$LLaw Library (Chicago)</xsl:text>
-						<xsl:text>$$1Law Library: X,MSS (Rare Book Room)</xsl:text>
+						<xsl:text>Law Library (Chicago)</xsl:text>
+						<xsl:text>Law Library: X,MSS (Rare Book Room)</xsl:text>
 					</xsl:when>
 					<xsl:when test="contains(mods:physicalLocation,'Transportation')">
 						<xsl:text>Main Library </xsl:text>
@@ -872,7 +877,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 <!--Links section-->
 	<xsl:template match="mods:location[mods:url/@access='object in context']" mode="links">
 		<linktorsrc>
-			<xsl:text>$$U</xsl:text><xsl:value-of select="mods:url[@access='object in context']"/><xsl:text>$$DLink to </xsl:text>
+			<xsl:value-of select="mods:url[@access='object in context']"/><xsl:text>Link to </xsl:text>
 			<xsl:choose>
 				<xsl:when test="mods:url[@access='object in context']/@displayLabel">
 					<xsl:value-of select="mods:url[@access='object in context']/@displayLabel"/>
@@ -884,20 +889,19 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 			<xsl:text> in </xsl:text>				
 			 <!--xsl:value-of select="$collection_name"/-->
 			 <xsl:value-of select="../mods:relatedItem[@type='host'][@otherType='sourceSystem']/mods:titleInfo/mods:title"/>				 
-			<xsl:text>$$I01NWU</xsl:text>
+			<xsl:text>01NWU</xsl:text>
 		</linktorsrc>
 			
 			<!--Added 20190828 to accommodate Glaze related_url element-->
 		<xsl:if test="../mods:relatedItem[@otherType='Related URL']/mods:location/mods:url">
 			<additionallinks>
-				<xsl:text>$$U</xsl:text><xsl:value-of select="../mods:relatedItem[@otherType='Related URL']/mods:location/mods:url"/><xsl:text>$$DLink to related URL</xsl:text>
-				<xsl:text>$$I01NWU</xsl:text>
+				<xsl:value-of select="../mods:relatedItem[@otherType='Related URL']/mods:location/mods:url"/><xsl:text>Link to related URL</xsl:text>
+				<xsl:text>01NWU</xsl:text>
 			</additionallinks>
 		</xsl:if>
 			
 			<xsl:if test="mods:url[@note='thumbnail']">
 				<thumbnail>
-					<xsl:text>$$U</xsl:text>
 					<xsl:value-of select="mods:url[@note='thumbnail']"/>
 				</thumbnail>			
 			</xsl:if>
