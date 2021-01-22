@@ -877,7 +877,10 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 <!--Links section-->
 	<xsl:template match="mods:location[mods:url/@access='object in context']" mode="links">
 		<linktorsrc>
-			<xsl:value-of select="mods:url[@access='object in context']"/><xsl:text>Link to </xsl:text>
+			<xsl:value-of select="mods:url[@access='object in context']"/>
+			<!--Removed for Primo VE-->
+			<!--
+			<xsl:text>Link to </xsl:text>
 			<xsl:choose>
 				<xsl:when test="mods:url[@access='object in context']/@displayLabel">
 					<xsl:value-of select="mods:url[@access='object in context']/@displayLabel"/>
@@ -887,9 +890,9 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:text> in </xsl:text>				
-			 <!--xsl:value-of select="$collection_name"/-->
-			 <xsl:value-of select="../mods:relatedItem[@type='host'][@otherType='sourceSystem']/mods:titleInfo/mods:title"/>				 
+			<xsl:value-of select="../mods:relatedItem[@type='host'][@otherType='sourceSystem']/mods:titleInfo/mods:title"/>				 
 			<xsl:text>01NWU</xsl:text>
+			-->
 		</linktorsrc>
 			
 			<!--Added 20190828 to accommodate Glaze related_url element-->
