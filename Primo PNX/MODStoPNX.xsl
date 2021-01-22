@@ -426,7 +426,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 
 <!--Changed 1. to split lds06 into smaller chunks for Primo VE and 2. to pull only from mods:note@type='for indexing only' /kdm Oct. 30, 2020-->
 	<xsl:template match="mods:note[@type='for indexing only']" mode="search">
-		<xsl:variable name="line-length" select="37850"/>
+		<xsl:variable name="line-length" select="4000"/>
 		<xsl:variable name="i">
 			<xsl:value-of select="(string-length(normalize-space(.)) idiv $line-length)"></xsl:value-of>
 		</xsl:variable>
