@@ -13,6 +13,7 @@ xmlns="http://www.loc.gov/mods/v3"
 <!--This XSL creates one MODS file for each EAD record.-->
 <!--ArchivesSpace is not exporting a URL; this has to be manually added to either the EAD, MODS or PNX-->
 <!--Note that ArchivesSpace does not export the <bioghist> associated with an Agent record. This was exported from Archon, so this is a loss of information in the full text search capability of the PNX-->
+<!--updated Aug. 5, 2020 to accommodate multiple Extent sub-records-->
 
 <!--The eadid@URL value must be manually added to the EAD on export as of March 2017-->
     
@@ -43,7 +44,7 @@ xmlns="http://www.loc.gov/mods/v3"
 		<xsl:call-template name="recordInfo"/>
 		<xsl:call-template name="allElse"/>
 		
-		<relatedItem  type="host" otherType="sourceSystem">>
+		<relatedItem  type="host" otherType="sourceSystem">
 			<titleInfo><title><xsl:value-of select="$collection_name"/></title></titleInfo>
 		</relatedItem>
 
@@ -245,23 +246,24 @@ xmlns="http://www.loc.gov/mods/v3"
 		<form authority="marcform">print</form>
 		<internetMediaType>text/xml</internetMediaType>
 		<digitalOrigin>born digital</digitalOrigin>
-		<xsl:for-each select="ead:archdesc/ead:did/ead:physdesc">
-			<extent>
-				<xsl:for-each select="ead:extent">
-					<xsl:choose>
-						<xsl:when test="preceding-sibling::ead:extent">
-							<xsl:text> (</xsl:text>
-							<xsl:value-of select="."/>
-							<xsl:text>)</xsl:text>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="."/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:for-each>
-			</extent>
-		</xsl:for-each>
 		
+			<xsl:for-each select="ead:archdesc/ead:did/ead:physdesc">
+				<extent>
+					<xsl:for-each select="ead:extent">
+						<xsl:choose>
+							<xsl:when test="preceding-sibling::ead:extent">
+								<xsl:text> (</xsl:text>
+								<xsl:value-of select="."/>
+								<xsl:text>)</xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="."/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:for-each>
+				</extent>
+			</xsl:for-each>
+			
 		<xsl:for-each select="ead:archdesc/ead:did/ead:physdesc/ead:dimensions">
 			<note>
 				<xsl:attribute name="displayLabel">
@@ -297,9 +299,11 @@ xmlns="http://www.loc.gov/mods/v3"
 
 <!-- abstract -->
 <xsl:template name="abstract">
-	<abstract><xsl:if test="ead:archdesc/ead:did/ead:abstract/@label"><xsl:attribute name="displayLabel"><xsl:value-of select="ead:archdesc/ead:did/ead:abstract/@label"/></xsl:attribute></xsl:if>
-		<xsl:value-of select="ead:archdesc/ead:did/ead:abstract"/>
-	</abstract>
+	<xsl:for-each select="ead:archdesc/ead:did/ead:abstract">
+		<abstract><xsl:if test="@label"><xsl:attribute name="displayLabel"><xsl:value-of select="@label"/></xsl:attribute></xsl:if>
+			<xsl:value-of select="."/>
+		</abstract>
+	</xsl:for-each>
 </xsl:template>
 
 <!--tableOfContents-->
@@ -521,12 +525,14 @@ xmlns="http://www.loc.gov/mods/v3"
 
 <!--recordInfo-->
 <xsl:template name="recordInfo">
+
 	<recordInfo>
 		<recordOrigin>ArchivesSpace</recordOrigin><!--NUL specific repository name-->
 		<recordContentSource authority="marcorg">IEN</recordContentSource><!--NUL specific MARC code-->
 		<recordCreationDate encoding="marc"><xsl:value-of select="ead:eadheader/ead:profiledesc/ead:creation/ead:date"/></recordCreationDate>
 		<recordChangeDate encoding="iso8601"><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001][M01][D01][H01][m01][s01]')"/>.0</recordChangeDate>
 		<recordIdentifier source="IEN">
+			<!--
 			<xsl:choose>
 				<xsl:when test="ead:eadheader/ead:eadid/@identifier">
 					<xsl:value-of select="ead:eadheader/ead:eadid/@identifier"/>
@@ -534,9 +540,15 @@ xmlns="http://www.loc.gov/mods/v3"
 				<xsl:otherwise>
 					<xsl:value-of select="ead:eadheader/ead:eadid"/>
 				</xsl:otherwise>
-			</xsl:choose>
+			</xsl:choose>-->
+			<xsl:text>ArchivesSpace-NUL-</xsl:text>
+				<xsl:value-of select="substring-after(ead:eadheader/ead:eadid/@url, 'resources/')"/>
 		</recordIdentifier>
-		<languageOfCataloging><languageTerm authority="iso639-2b" type="code"><xsl:value-of select="ead:eadheader/ead:profiledesc/ead:langusage"></xsl:value-of></languageTerm></languageOfCataloging>
+		<languageOfCataloging>
+			<languageTerm authority="iso639-2b" type="code">
+				<xsl:value-of select="ead:eadheader/ead:profiledesc/ead:langusage"/>
+			</languageTerm>
+		</languageOfCataloging>
 		<recordInfoNote>item</recordInfoNote>
 	</recordInfo>
 </xsl:template>
