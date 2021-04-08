@@ -15,7 +15,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 <!--March 2021, created from code that creates Primo PNX-->
 
 <!--@encoding below needs to be us-ascii to deal with diacritics-->
-	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="us-ascii" media-type="text/xml"/>	
+	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="utf-8" media-type="text/xml"/>	
 	<xsl:strip-space elements="*"/>
 	
 	<xsl:template match="/">
