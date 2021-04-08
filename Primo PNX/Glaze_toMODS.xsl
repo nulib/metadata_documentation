@@ -6,6 +6,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink"
 xmlns:ead="urn:isbn:1-931666-22-9" 
 xmlns:mods="http://www.loc.gov/mods/v3"  
 xmlns="http://www.loc.gov/mods/v3">
+	
+	<!--Deprecated as of April 2021-->
 
  
 <!--This stylesheet transforms Glaze records into MODS. Based on a stylesheet developed by Karen Miller in 2014.-->
