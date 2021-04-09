@@ -15,11 +15,13 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 <!--March 2021, created from code that creates Primo PNX-->
 
 <!--@encoding below needs to be us-ascii to deal with diacritics-->
-	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="utf-8" media-type="text/xml"/>	
+	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="us-ascii" media-type="text/xml"/>	
 	<xsl:strip-space elements="*"/>
 	
 	<xsl:template match="/">
-		<pnx>
+		<pnx xmlns:discovery="https://dc.library.northwestern.edu/"
+			xmlns:dcterms="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd"
+			xmlns:dc="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd">
 			<xsl:for-each select="//mods:mods">
 		
 				<xsl:variable name="collection_name">
