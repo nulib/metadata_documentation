@@ -432,7 +432,7 @@ xmlns="http://www.loc.gov/mods/v3">
 		
 	<xsl:template name="allElse">
 		<note type="for indexing only">
-			<xsl:for-each select="descendant-or-self::text()">
+			<xsl:for-each select="descriptiveMetadata/descendant-or-self::text()">
 				<xsl:value-of select="normalize-space(.)"/><xsl:text>  </xsl:text>
 			</xsl:for-each>
 		</note>
