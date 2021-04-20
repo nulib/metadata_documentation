@@ -335,9 +335,9 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 	
 	<!--isPartOf--><!--Primo sees the semi-colon as a separator, so replace it in the collection name with a comma-->
 	<xsl:template match="mods:relatedItem[@type='host']" mode="display">
-		<dcterms:ispartof>
+		<dcterms:isPartOf>
 			<xsl:value-of select="replace(mods:titleInfo/mods:title, ';', ',')"/>
-		</dcterms:ispartof>
+		</dcterms:isPartOf>
 	</xsl:template>
 	
 	<!--Resource Type-->
