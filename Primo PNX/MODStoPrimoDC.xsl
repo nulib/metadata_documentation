@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
+xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd" 
 xmlns:mods="http://www.loc.gov/mods/v3" exclude-result-prefixes="mods" 
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-xmlns:discovery="https://dc.library.northwestern.edu/"
-xmlns:dcterms="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd"
-xmlns:dc="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd">
+xmlns:discovery="http://purl.org/dc/elements/1.1/"
+xmlns:dcterms="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd" 
+xmlns:dc="http://purl.org/dc/elements/1.1/">
 
 <!-- This stylesheet transforms MODS version 3.5 records Dublin Core that is customized for use in Primo VE.
 This stylesheet has been developed for use with the Northwestern University Library archival and manuscript collections MODS records
@@ -18,18 +20,39 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="us-ascii" media-type="text/xml"/>	
 	<xsl:strip-space elements="*"/>
 	
-	<xsl:template match="/">
-		<pnx xmlns:discovery="https://dc.library.northwestern.edu/"
-			xmlns:dcterms="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd"
-			xmlns:dc="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd">
-			<xsl:for-each select="//mods:mods">
+<xsl:template match="/">
 		
-				<xsl:variable name="collection_name">
-					<xsl:value-of select="mods:relatedItem[@type='host']/mods:titleInfo/mods:title"/>
-				</xsl:variable>			
+	<xsl:for-each select="//mods:mods">
+		
+		<xsl:variable name="collection_name">
+			<xsl:value-of select="mods:relatedItem[@type='host']/mods:titleInfo/mods:title"/>
+		</xsl:variable>			
 
-				<record>
-			
+		<record>
+			<header>
+				<identifier>
+					<xsl:text>oai:</xsl:text>
+					<xsl:value-of select="normalize-space(mods:recordInfo/mods:recordIdentifier[@source='IEN'])"/>
+				</identifier>
+				<datestamp><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]Z')"/></datestamp>
+				<setSpec>
+					<xsl:choose>
+						<xsl:when test="mods:recordInfo/mods:recordOrigin='Archon' or mods:recordInfo/mods:recordOrigin='ArchivesSpace' ">
+						<xsl:text>findingAids</xsl:text>
+					</xsl:when>
+					<xsl:when test="mods:recordInfo/mods:recordOrigin='Glaze'">
+						<xsl:text>images</xsl:text>
+					</xsl:when>
+					<xsl:when test="mods:recordInfo/mods:recordOrigin='Arch'">
+						<xsl:text>arch</xsl:text>
+					</xsl:when>
+					<xsl:otherwise>otherExternal</xsl:otherwise>
+					</xsl:choose>
+				</setSpec>
+			</header>
+			<metadata>
+				<oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd" xmlns:dcterms="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd" xmlns:discovery="http://purl.org/dc/elements/1.1/">
+							
 					<xsl:apply-templates mode="display"/><!--some of the elements get used twice and this allows nodes to get matched more than one-->
 					<xsl:apply-templates/>
 
@@ -46,11 +69,11 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 					<discovery:local28>
 						<xsl:value-of select="$collection_name"/>
 					</discovery:local28>
-					
-				</record>
-			</xsl:for-each>
-		</pnx>
-	</xsl:template>
+				</oai_dc:dc>
+			</metadata>	
+		</record>
+	</xsl:for-each>
+</xsl:template>
 
 	<xsl:template match="mods:modsCollection"/>
 
