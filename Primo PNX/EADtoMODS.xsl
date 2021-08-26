@@ -65,7 +65,7 @@ xmlns="http://www.loc.gov/mods/v3"
 				<!--select the titleproper that does not have @type='filing' and only select the text in it, not the subordinate <num> element-->
 			<xsl:choose>
 				<xsl:when test="ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num">
-						<xsl:value-of select="substring($title, 1, string-length($title)-string-length(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num[1])-1)"/>
+					<xsl:value-of select="normalize-space(substring($title, 1, string-length($title)-string-length(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num[1])))"/>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="$title"/>
