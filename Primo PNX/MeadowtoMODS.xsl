@@ -358,7 +358,7 @@ xmlns="http://www.loc.gov/mods/v3">
 		<recordInfo>
 			<recordOrigin>Glaze</recordOrigin><!--NUL specific repository name-->
 			<recordContentSource authority="marcorg">IEN</recordContentSource><!--NUL specific MARC code-->
-			<recordCreationDate encoding="marc"><xsl:value-of select="create_date"/><xsl:value-of select="create-date"/></recordCreationDate>
+			<recordCreationDate encoding="marc"><xsl:value-of select="createDate"/><xsl:value-of select="create-date"/></recordCreationDate>
 			<recordChangeDate encoding="iso8601"><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001][M01][D01][H01][m01][s01]')"/>.0</recordChangeDate>
 			<recordIdentifier source="IEN">
 				<xsl:value-of select="../_id"/>
