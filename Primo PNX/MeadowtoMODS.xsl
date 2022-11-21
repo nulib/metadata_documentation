@@ -280,7 +280,7 @@ xmlns="http://www.loc.gov/mods/v3">
 	<!--subjects-->
 	<xsl:template name="subjects">
 	
-		<xsl:for-each select="descriptiveMetadata/subject/subject">
+		<xsl:for-each select="descriptiveMetadata/subject">
 			<xsl:choose>
 				<xsl:when test="role/id='TOPICAL'">
 					<subject>
