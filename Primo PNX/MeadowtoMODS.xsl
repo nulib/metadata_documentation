@@ -239,8 +239,8 @@ xmlns="http://www.loc.gov/mods/v3">
 	
 	<!--note-->
 	<xsl:template name="note">
-		<xsl:for-each select="descriptiveMetadata/notes/note">
-			<xsl:if test=".!=''">
+		<xsl:for-each select="descriptiveMetadata/notes/note/note">
+			<xsl:if test=". !=''">
 				<note>
 					<xsl:value-of select="normalize-space(.)"/>
 				</note>
@@ -280,7 +280,7 @@ xmlns="http://www.loc.gov/mods/v3">
 	<!--subjects-->
 	<xsl:template name="subjects">
 	
-		<xsl:for-each select="descriptiveMetadata/subject">
+		<xsl:for-each select="descriptiveMetadata/subject/subject">
 			<xsl:choose>
 				<xsl:when test="role/id='TOPICAL'">
 					<subject>
