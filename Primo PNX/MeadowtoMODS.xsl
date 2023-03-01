@@ -11,18 +11,19 @@ xmlns="http://www.loc.gov/mods/v3">
 <!--This stylesheet transforms DONUT records into MODS. Based on a stylesheet developed by Karen Miller in 2014.-->
 <!--This XSL creates one MODS file for each DONUT record.-->
 <!--DONUT records are harvested as JSON and must be converted to XML before using this transformation.-->
+<!--updated March 2023 to accommodate the new data structure in the RDC Images repository-->
 
 <xsl:output method="xml" indent="yes" omit-xml-declaration="no"  media-type="text/xml" encoding="utf-8"/>
 <xsl:strip-space elements="*"/>
 
 
-	<xsl:template match="JSON">
+	<xsl:template match="root">
 		<modsCollection xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/mods/v3" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd">
 			<xsl:apply-templates/>
 		</modsCollection>
 	</xsl:template>
 	
-	<xsl:template match="//_source">
+	<xsl:template match="data/item">
 		
 		<mods>
 			
@@ -56,8 +57,8 @@ xmlns="http://www.loc.gov/mods/v3">
 	</xsl:template>
 
 	
-	<!--Housekeeping. This clears out unneeded information at the top of a file of multiple records-->
-	<xsl:template match="_scroll_id | _scroll-id | _index | _type | _id | _version | found | took | timed_out | timed-out | terminated_early | terminated-early | _shards | hits/total | hits/max_score | hits/hits/_index | hits/hits/_type | hits/hits/_id | hits/hits/_score | sort"/>
+	<!--Housekeeping. This clears out unneeded information at the bottom of the file related to the query-->
+	<xsl:template match="pagination | info"/>
 
 
 	<!--titleInfo section-->
@@ -65,11 +66,11 @@ xmlns="http://www.loc.gov/mods/v3">
 		
 		<titleInfo>
 			<title>
-				<xsl:value-of select="normalize-space(descriptiveMetadata/title)"/>			
+				<xsl:value-of select="normalize-space(title)"/>			
 			</title>
 		</titleInfo>
 		
-		<xsl:for-each select="descriptiveMetadata/alternateTitle/alternateTitle">
+		<xsl:for-each select="alternate_title">
 			<xsl:if test=".!=''">
 				<titleInfo>
 					<xsl:attribute name="type">alternative</xsl:attribute>
@@ -80,7 +81,7 @@ xmlns="http://www.loc.gov/mods/v3">
 			</xsl:if>
 		</xsl:for-each>
 		
-		<xsl:for-each select="descriptiveMetadata/caption">
+		<xsl:for-each select="caption">
 			<xsl:if test=".!=''">
 				<titleInfo>
 					<xsl:attribute name="type">alternative</xsl:attribute>
@@ -97,19 +98,16 @@ xmlns="http://www.loc.gov/mods/v3">
 		<!--name section-->
 		<xsl:template name="name">
 				
-			<xsl:for-each select="descriptiveMetadata//creator/term/label | descriptiveMetadata//contributor/term/label">
+			<xsl:for-each select="creator/item/label | contributor/item/label">
 				<xsl:call-template name="origination_name">
 					<xsl:with-param name="valueURI">
 						<xsl:choose>
-							<xsl:when test="../term/id='null'"/>
+							<xsl:when test="../item/id='null'"/>
 							<xsl:otherwise><xsl:value-of select="../id"/></xsl:otherwise>
 						</xsl:choose>
 					</xsl:with-param>
 					<xsl:with-param name="roleTerm">
-						<xsl:value-of select="../../role/label"/>
-					</xsl:with-param>
-					<xsl:with-param name="roleCode">
-						<xsl:value-of select="../../role/id"/>
+						<xsl:value-of select="../role"/>
 					</xsl:with-param>
 				</xsl:call-template>
 			</xsl:for-each>
@@ -120,13 +118,11 @@ xmlns="http://www.loc.gov/mods/v3">
 	<xsl:template name="origination_name">
 		<xsl:param name="valueURI"/>
 		<xsl:param name="roleTerm"/>
-		<xsl:param name="roleCode"/>
 		<name>
 			<xsl:if test="$valueURI !=''">
 				<xsl:attribute name="valueURI"><xsl:value-of select="$valueURI"/></xsl:attribute>
 			</xsl:if>
 			<xsl:if test="$roleTerm !=''"><role><roleTerm type="text"><xsl:value-of select="$roleTerm"/></roleTerm></role></xsl:if>
-			<xsl:if test="$roleCode !=''"><role><roleTerm type="code"><xsl:value-of select="$roleCode"/></roleTerm></role></xsl:if>
 			<namePart>	
 				<xsl:value-of select="normalize-space(.)"/>
 			</namePart>
@@ -137,13 +133,23 @@ xmlns="http://www.loc.gov/mods/v3">
 	
 	<!--typeOfResource-->
 	<xsl:template name="typeOfResource">
-		<typeOfResource>still image</typeOfResource>
+		<xsl:choose>
+			<xsl:when test="work_type='Image'">
+				<typeOfResource valueURI="https://www.loc.gov/standards/mods/userguide/typeofresource/img">still image</typeOfResource>
+			</xsl:when>
+			<xsl:when test="work_type='Video'">
+				<typeOfResource valueURI="https://www.loc.gov/standards/mods/userguide/typeofresource/mov">moving image</typeOfResource>
+			</xsl:when>
+			<xsl:when test="work_type='Audio'">
+				<typeOfResource valueURI="https://www.loc.gov/standards/mods/userguide/typeofresource/aud">audio</typeOfResource>
+			</xsl:when>
+		</xsl:choose>
 	</xsl:template>			
 	
 	
 	<!--genre-->
 	<xsl:template name="genre">
-		<xsl:for-each select="descriptiveMetadata/genre//term/label">
+		<xsl:for-each select="genre//item/label">
 			<genre>
 				<xsl:attribute name="valueURI"><xsl:value-of select="..//id"/></xsl:attribute>
 				<xsl:value-of select="."/>
@@ -154,16 +160,16 @@ xmlns="http://www.loc.gov/mods/v3">
 		
 	<!--OriginInfo-->
 	<xsl:template name="originInfo">
-		<xsl:if test="descriptiveMetadata/publisher/publisher or descriptiveMetadata/dateCreated/dateCreated">
+		<xsl:if test="publisher/item or date_created/item">
 			<originInfo>
-				<xsl:for-each select="descriptiveMetadata/publisher/publisher">
+				<xsl:for-each select="publisher/item">
 					<publisher>
 						<xsl:value-of select="normalize-space(.)"/>
 					</publisher>
 				</xsl:for-each>
-				<xsl:for-each select="descriptiveMetadata/dateCreated/dateCreated">	
+				<xsl:for-each select="date_created/item">	
 					<dateCreated>
-						<xsl:value-of select="humanized"/>
+						<xsl:value-of select="normalize-space(.)"/>
 					</dateCreated>
 				</xsl:for-each>
 			</originInfo>
@@ -173,7 +179,7 @@ xmlns="http://www.loc.gov/mods/v3">
 	
 	<!-- language -->
 	<xsl:template name="language">
-		<xsl:for-each select="descriptiveMetadata/language//term">
+		<xsl:for-each select="language/item">
 			<language>
 				<languageTerm type="text">
 					<xsl:attribute name="valueURI"><xsl:value-of select="id"/></xsl:attribute>
@@ -188,22 +194,21 @@ xmlns="http://www.loc.gov/mods/v3">
 	</xsl:template>
 	
 	
-	<!--physicalDescription-->
+	<!--physicalDescription--><!--this can result in an empty <extent> element, but the MODStoPrimoDC conversion will ignore that.-->
 	<xsl:template name="physicalDescription">
 		<physicalDescription>
-			<internetMediaType>image</internetMediaType>
 			<extent>	
-				<xsl:for-each select="descriptiveMetadata/physicalDescriptionMaterial/physicalDescriptionMaterial">
-					<xsl:if test="preceding-sibling::physicalDescriptionMaterial">
+				<xsl:for-each select="physical_description_material/item">
+					<xsl:if test="preceding-sibling::physical_description_material/item">
 						<xsl:text>, </xsl:text>
 					</xsl:if>
 					<xsl:value-of select="."/>
 				</xsl:for-each>
-				<xsl:for-each select="descriptiveMetadata/physicalDescriptionSize/physicalDescriptionSize">
-					<xsl:if test=".!='' and ../../physicalDescriptionMaterial/physicalDescriptionMaterial !=''">
+				<xsl:for-each select="physical_description_size/item">
+					<xsl:if test=".!='' and ../physical_description_size !=''">
 						<xsl:text> ; </xsl:text>
 					</xsl:if>
-					<xsl:if test="preceding-sibling::physicalDescriptionSize">
+					<xsl:if test="preceding-sibling::physical_description_size">
 						<xsl:text>, </xsl:text>
 					</xsl:if>
 					<xsl:value-of select="."/>
@@ -215,7 +220,7 @@ xmlns="http://www.loc.gov/mods/v3">
 	
 	<!-- abstract -->
 	<xsl:template name="abstract">
-		<xsl:for-each select="descriptiveMetadata/description/description | descriptiveMetadata/abstract/abstract">
+		<xsl:for-each select="description/item | abstract/item">
 			<xsl:if test=".!=''">
 				<abstract>
 					<xsl:value-of select="normalize-space(.)"/>
@@ -227,7 +232,7 @@ xmlns="http://www.loc.gov/mods/v3">
 	
 	<!--tableOfContents-->
 	<xsl:template name="tableOfContents">
-		<xsl:for-each select="descriptiveMetadata/tableOfContents/tableOfContents">
+		<xsl:for-each select="table_of_contents/item">
 			<xsl:if test=".!=''">
 				<tableOfContents>
 					<xsl:value-of select="normalize-space(.)"/>
@@ -239,15 +244,16 @@ xmlns="http://www.loc.gov/mods/v3">
 	
 	<!--note-->
 	<xsl:template name="note">
-		<xsl:for-each select="descriptiveMetadata/notes/note/note">
+		<xsl:for-each select="notes/item/note">
 			<xsl:if test=". !=''">
 				<note>
+					<xsl:attribute name="displayLabel"><xsl:value-of select="../type"/></xsl:attribute>
 					<xsl:value-of select="normalize-space(.)"/>
 				</note>
 			</xsl:if>
 		</xsl:for-each>
 		
-		<xsl:for-each select="descriptiveMetadata/scopeAndContents/scopeAndContent">
+		<xsl:for-each select="scope_and_contents/item">
 			<xsl:if test=".!=''">
 				<note displayLabel="Scope and Contents">
 					<xsl:value-of select="normalize-space(.)"/>
@@ -259,15 +265,15 @@ xmlns="http://www.loc.gov/mods/v3">
 	
 	<!--AccessCondition-->
 	<xsl:template name="accessCondition">
-		<xsl:for-each select="descriptiveMetadata/rightsStatement">
+		<xsl:for-each select="rights_statement/label">
 			<xsl:if test=".!=''">
 				<accessCondition type="rights">
-					<xsl:attribute name="xlink:href"><xsl:value-of select="id"/> </xsl:attribute>
-					<xsl:value-of select="normalize-space(label)"/>
+					<xsl:attribute name="xlink:href"><xsl:value-of select="../id"/> </xsl:attribute>
+					<xsl:value-of select="normalize-space(.)"/>
 				</accessCondition>
 			</xsl:if>
 		</xsl:for-each>
-		<xsl:for-each select="descriptiveMetadata/termsOfUse">
+		<xsl:for-each select="terms_of_use">
 			<xsl:if test=".!=''">
 				<accessCondition type="useAndReproduction">
 					<xsl:value-of select="normalize-space(.)"/>
@@ -280,47 +286,47 @@ xmlns="http://www.loc.gov/mods/v3">
 	<!--subjects-->
 	<xsl:template name="subjects">
 	
-		<xsl:for-each select="descriptiveMetadata/subject/subject">
+		<xsl:for-each select="subject/item">
 			<xsl:choose>
-				<xsl:when test="role/id='TOPICAL'">
+				<xsl:when test="role='Topical'">
 					<subject>
-						<xsl:if test="term/id != 'null'"><xsl:attribute name="valueURI"><xsl:value-of select="term/id"/></xsl:attribute></xsl:if>
+						<xsl:if test="id != 'null'"><xsl:attribute name="valueURI"><xsl:value-of select="id"/></xsl:attribute></xsl:if>
 						<topic>
-							<xsl:value-of select="term/label"/>
+							<xsl:value-of select="label"/>
 						</topic>
 					</subject>
 				</xsl:when>
-				<xsl:when test="role/id='TEMPORAL'">
+				<xsl:when test="role='Temporal'">
 					<subject>
-						<xsl:if test="term/id != 'null'"><xsl:attribute name="valueURI"><xsl:value-of select="term/id"/></xsl:attribute></xsl:if>
+						<xsl:if test="id != 'null'"><xsl:attribute name="valueURI"><xsl:value-of select="id"/></xsl:attribute></xsl:if>
 						<temporal>
-							<xsl:value-of select="term/label"/>
+							<xsl:value-of select="label"/>
 						</temporal>
 					</subject>
 				</xsl:when>
-				<xsl:when test="role/id='GEOGRAPHICAL'">
+				<xsl:when test="role='Geographical'">
 					<subject>
-						<xsl:if test="term/id != 'null'"><xsl:attribute name="valueURI"><xsl:value-of select="term/id"/></xsl:attribute></xsl:if>
+						<xsl:if test="id != 'null'"><xsl:attribute name="valueURI"><xsl:value-of select="id"/></xsl:attribute></xsl:if>
 						<geographic>
-							<xsl:value-of select="term/label"/>
+							<xsl:value-of select="label"/>
 						</geographic>
 					</subject>
 				</xsl:when>
 				<xsl:otherwise>
 					<subject>
 						<topic>
-							<xsl:value-of select="term/label"/>
+							<xsl:value-of select="label"/>
 						</topic>
 					</subject>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:for-each>
 		
-		<xsl:for-each select="descriptiveMetadata/stylePeriod/stylePeriod">
+		<xsl:for-each select="style_period/item">
 			<subject>
-				<xsl:if test="term/id != 'null'"><xsl:attribute name="valueURI"><xsl:value-of select="term/id"/></xsl:attribute></xsl:if>
+				<xsl:if test="id != 'null'"><xsl:attribute name="valueURI"><xsl:value-of select="id"/></xsl:attribute></xsl:if>
 				<topic>
-					<xsl:value-of select="term/label"/>
+					<xsl:value-of select="label"/>
 				</topic>
 			</subject>
 		</xsl:for-each>
@@ -331,7 +337,7 @@ xmlns="http://www.loc.gov/mods/v3">
 	<!--identifers and URLs-->
 	<xsl:template name="identifier">
 		
-		<xsl:for-each select="descriptiveMetadata/identifier/identifier">
+		<xsl:for-each select="identifier/item">
 			<identifier type="local">
 				<xsl:value-of select="normalize-space(.)"/>
 			</identifier>
@@ -345,7 +351,7 @@ xmlns="http://www.loc.gov/mods/v3">
 				<xsl:value-of select="id"/>
 			</url>
 			<url displayLabel="Thumbnail" note="thumbnail">
-				<xsl:value-of select="representativeFileSet/url"/>			
+				<xsl:value-of select="representative_file_set/url"/>			
 				<xsl:text>/square/100,100/0/default.jpg</xsl:text>
 			</url>
 		</location>
@@ -358,10 +364,10 @@ xmlns="http://www.loc.gov/mods/v3">
 		<recordInfo>
 			<recordOrigin>Glaze</recordOrigin><!--NUL specific repository name-->
 			<recordContentSource authority="marcorg">IEN</recordContentSource><!--NUL specific MARC code-->
-			<recordCreationDate encoding="marc"><xsl:value-of select="createDate"/><xsl:value-of select="create-date"/></recordCreationDate>
+			<recordCreationDate encoding="marc"><xsl:value-of select="createDate"/><xsl:value-of select="create_date"/></recordCreationDate>
 			<recordChangeDate encoding="iso8601"><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001][M01][D01][H01][m01][s01]')"/>.0</recordChangeDate>
 			<recordIdentifier source="IEN">
-				<xsl:value-of select="../_id"/>
+				<xsl:value-of select="representative_file_set/id"/>
 			</recordIdentifier>
 			<languageOfCataloging><languageTerm authority="iso639-2b" type="code">eng</languageTerm></languageOfCataloging>
 			<recordInfoNote>item</recordInfoNote>
@@ -373,11 +379,13 @@ xmlns="http://www.loc.gov/mods/v3">
 	<xsl:template name="location">
 		<location>
 			<physicalLocation>
-				<xsl:value-of select="administrativeMetadata/libraryUnit/label"/>
+				<xsl:value-of select="library_unit"/>
 			</physicalLocation>
-			<shelfLocator>
-				<xsl:value-of select="descriptiveMetadata/identifier/identifier[1]"/>
-			</shelfLocator>
+			<xsl:if test="identifier/item">
+				<shelfLocator>
+					<xsl:value-of select="identifier/item"/>
+				</shelfLocator>
+			</xsl:if>
 		</location>
 	</xsl:template>
 	
@@ -395,7 +403,7 @@ xmlns="http://www.loc.gov/mods/v3">
 			</relatedItem>				
 		</xsl:for-each>
 				
-		<xsl:for-each select="descriptiveMetadata/series/series">
+		<xsl:for-each select="series/item">
 			<relatedItem type="series">
 				<titleInfo><title>
 					<xsl:value-of select="normalize-space(.)"/>
@@ -403,23 +411,26 @@ xmlns="http://www.loc.gov/mods/v3">
 			</relatedItem>
 		</xsl:for-each>
 				
-		<xsl:for-each select="descriptiveMetadata/relatedUrl/relatedUrl/url">
+		<xsl:for-each select="related_url/item/url">
 				<relatedItem otherType="Related URL">
+					<xsl:attribute name="displayLabel">
+							<xsl:value-of select="../label"/>
+					</xsl:attribute>
 					<location><url>
 						<xsl:value-of select="normalize-space(.)"/>
 					</url></location>
 				</relatedItem>
 		</xsl:for-each>
 		
-		<xsl:for-each select="descriptiveMetadata/relatedMaterial/relatedMaterial">
-				<relatedItem otherType="Related Material">
-					<title><titleInfo>
+		<xsl:for-each select="related_material/item">
+				<relatedItem otherType="Related Material" displayLabel="Related Material">
+					<titleInfo><title>
 						<xsl:value-of select="normalize-space(.)"/>
-					</titleInfo></title>
+					</title></titleInfo>
 				</relatedItem>
 		</xsl:for-each>
 		
-		<xsl:for-each select="descriptiveMetadata/source/source">
+		<xsl:for-each select="source/item">
 			<relatedItem type='original' displayLabel='Source'>
 				<titleInfo><title>
 					<xsl:value-of select="normalize-space(.)"/>
@@ -432,7 +443,7 @@ xmlns="http://www.loc.gov/mods/v3">
 		
 	<xsl:template name="allElse">
 		<note type="for indexing only">
-			<xsl:for-each select="descriptiveMetadata/descendant-or-self::text()">
+			<xsl:for-each select="descendant-or-self::text()">
 				<xsl:value-of select="normalize-space(.)"/><xsl:text>  </xsl:text>
 			</xsl:for-each>
 		</note>
