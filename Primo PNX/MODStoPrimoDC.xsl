@@ -15,6 +15,7 @@ This stylesheet has been developed for use with the Northwestern University Libr
 Arch institutional repository. It is copied from the MODS to DC crosswalk at http://www.loc.gov/standards/mods/MODS3-22simpleDC.xsl.
 Edited by Karen Miller to meet the needs of NUL.	-->
 <!--March 2021, created from code that creates Primo PNX-->
+<!--Update March 2023-->
 
 <!--@encoding below needs to be us-ascii to deal with diacritics-->
 	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="us-ascii" media-type="text/xml"/>	
@@ -139,7 +140,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 	</xsl:template>
 	
 	<!--Series -->
-	<xsl:template match="mods:relatedItem[not(@type='host') and not(@otherType='Related URL')]" mode="display">
+	<xsl:template match="mods:relatedItem[not(@type='host') and not(@otherType='Related URL') and not(@otherType='Related Material')]" mode="display">
 		<xsl:for-each select=".">
 			<discovery:local22>
 				<xsl:choose>
@@ -150,6 +151,10 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 						<xsl:value-of select="normalize-space(mods:location/mods:url)"/>
 					</xsl:when>
 					<xsl:otherwise>
+						<xsl:if test="@displayLabel">
+							<xsl:value-of select="@displayLabel"/>
+							<xsl:text>: </xsl:text>
+						</xsl:if>
 						<xsl:value-of select="descendant-or-self::text()"/>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -356,6 +361,27 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 		</xsl:if>
 	</xsl:template>
 	
+	<!--Related URLs and Related Material-->
+	<xsl:template match="mods:relatedItem[@otherType='Related URL']">
+		<discovery:local50>
+			<xsl:if test="@displayLabel">
+				<xsl:value-of select="@displayLabel"/>
+				<xsl:text>: </xsl:text>
+			</xsl:if>
+			<xsl:value-of select="mods:location/mods:url"/>
+		</discovery:local50>
+	</xsl:template>
+	
+	<xsl:template match="mods:relatedItem[@otherType='Related Material']">
+			<discovery:local50>
+			<xsl:if test="@displayLabel"><xsl:value-of select="@displayLabel"/></xsl:if>
+				<xsl:text>: </xsl:text>
+			<xsl:value-of select="mods:titleInfo/mods:title"/>
+		</discovery:local50>
+	</xsl:template>
+	
+	
+	
 	<!--isPartOf--><!--Primo sees the semi-colon as a separator, so replace it in the collection name with a comma-->
 	<xsl:template match="mods:relatedItem[@type='host']" mode="display">
 		<dcterms:isPartOf>
@@ -405,6 +431,9 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 						<xsl:text>scores</xsl:text>
 					</xsl:if>
 					<xsl:if test="starts-with(.,'sound recording')">
+						<xsl:text>audios</xsl:text>
+					</xsl:if>
+					<xsl:if test=".='audio'">
 						<xsl:text>audios</xsl:text>
 					</xsl:if>
 					<xsl:if test=".='still image'">
