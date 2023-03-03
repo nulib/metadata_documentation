@@ -347,6 +347,7 @@ xmlns="http://www.loc.gov/mods/v3">
 		
 		<location>
 			<url displayLabel="Digitized Image" access="object in context">
+				<xsl:if test="contains(visibility,'Institution')"><xsl:attribute name="note">netID</xsl:attribute></xsl:if><!--note to indicate netID login required-->
 				<xsl:text>https://dc.library.northwestern.edu/items/</xsl:text>
 				<xsl:value-of select="id"/>
 			</url>
