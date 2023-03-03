@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+	<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
 xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
@@ -15,7 +15,7 @@ This stylesheet has been developed for use with the Northwestern University Libr
 Arch institutional repository. It is copied from the MODS to DC crosswalk at http://www.loc.gov/standards/mods/MODS3-22simpleDC.xsl.
 Edited by Karen Miller to meet the needs of NUL.	-->
 <!--March 2021, created from code that creates Primo PNX-->
-<!--Update March 2023-->
+<!--Updated March 2023-->
 
 <!--@encoding below needs to be us-ascii to deal with diacritics-->
 	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="us-ascii" media-type="text/xml"/>	
@@ -58,6 +58,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 					<xsl:apply-templates/>
 
 					<xsl:if test="mods:recordInfo/mods:recordOrigin='Archon' or mods:recordInfo/mods:recordOrigin='ArchivesSpace' ">
+						<discovery:local28>01NWU_EAD</discovery:local28>
 						<discovery:local28>01NWU_EAD</discovery:local28>
 					</xsl:if>
 					<xsl:if test="mods:recordInfo/mods:recordOrigin='Glaze'">
@@ -361,6 +362,7 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 		</xsl:if>
 	</xsl:template>
 	
+	
 	<!--Related URLs and Related Material-->
 	<xsl:template match="mods:relatedItem[@otherType='Related URL']">
 		<discovery:local50>
@@ -529,6 +531,15 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 <!--Links section-->
 	<xsl:template match="mods:location[mods:url/@access='object in context']">
 		
+		<xsl:if test="mods:url[@note='netID']">
+			<discovery:local50>
+				<xsl:text>This Work requires Northwestern University NetID authentication.</xsl:text>
+			</discovery:local50>
+			<dcterms:source>
+				<xsl:text>This Work requires Northwestern University NetID authentication.</xsl:text>
+			</dcterms:source>	
+		</xsl:if>
+		
 		<dcterms:source>
 			<xsl:value-of select="mods:url[@access='object in context']"/>
 		</dcterms:source>
@@ -633,4 +644,5 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 </xsl:template>
 
 
-</xsl:stylesheet>
+</xsl:stylesheet>		
+	
