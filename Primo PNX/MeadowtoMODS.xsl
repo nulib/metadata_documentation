@@ -23,7 +23,8 @@ xmlns="http://www.loc.gov/mods/v3">
 		</modsCollection>
 	</xsl:template>
 	
-	<xsl:template match="data/item">
+	<!--xsl:template match="data/item"--><!--changed due to an apparent change to the RDC data structure.-->
+	<xsl:template match="item">
 		
 		<mods>
 			
