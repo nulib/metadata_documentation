@@ -15,7 +15,7 @@
 
 ## Step 2: Export from ALMA using a publishing profile
 
-!!! note need correct ALMA permissions to do this
+**Note**: need correct ALMA permissions to do this
 
 - ALMA menu &gt; `Resources` &gt; `Publishing Profile` &gt; Add `Profile`
 
@@ -45,13 +45,13 @@
 
 ## Step 4: Fields to remove/add
 
-!!! Note: this step could _probably_ also be done with a normalization rule
+**Note:** this step could _probably_ also be done with a normalization rule
 
 - Open the `.mrk` file created in MARCEdit
 - Remove `9XX` fields other than the `955`. (948, 949, 938, 994)
 - Remove `035 $9`
 
-!!! danger ONLY `035 $a (OCoLC)` should remain -  no `019` or `035 $z`
+**Note:** ONLY `035 $a (OCoLC)` should remain -  no `019` or `035 $z`
 
 ### Required elements
 
@@ -80,7 +80,7 @@
 - `[HathiTrust gives you a naming convention]`
 - This naming convention also ensure sthat your files are not run through your configuration for any Google-scanned materials.
 
-!!! caution Google-scanned materials have a different file naming convention
+**Note:** Google-scanned materials have a different file naming convention
 
 - Use [CoreFTP](http://www.coreftp.com/) to upload file
 - Upload file to **ftps.cdlib.org/submissions**
