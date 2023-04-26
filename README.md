@@ -6,7 +6,7 @@ Repository for scripts and files related to metadata used at Northwestern Univer
 
 [NUSearch](https://www.library.northwestern.edu/) - Our Primo-based discovery layer which also has metadata added from these additional systems.
 
-!!! Note Only publically or institutionally available materials appear in NUSearch
+**Note**: Only publically or institutionally available materials appear in NUSearch
 
 - Alma - MARC-based intergrated library system
 
