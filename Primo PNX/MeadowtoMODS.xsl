@@ -369,7 +369,7 @@ xmlns="http://www.loc.gov/mods/v3">
 			<recordCreationDate encoding="marc"><xsl:value-of select="createDate"/><xsl:value-of select="create_date"/></recordCreationDate>
 			<recordChangeDate encoding="iso8601"><xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001][M01][D01][H01][m01][s01]')"/>.0</recordChangeDate>
 			<recordIdentifier source="IEN">
-				<xsl:value-of select="representative_file_set/id"/>
+				<xsl:value-of select="id"/>
 			</recordIdentifier>
 			<languageOfCataloging><languageTerm authority="iso639-2b" type="code">eng</languageTerm></languageOfCataloging>
 			<recordInfoNote>item</recordInfoNote>
