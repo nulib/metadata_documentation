@@ -16,6 +16,8 @@ Arch institutional repository. It is copied from the MODS to DC crosswalk at htt
 Edited by Karen Miller to meet the needs of NUL.	-->
 <!--March 2021, created from code that creates Primo PNX-->
 <!--Updated March 2023-->
+<!--IMPORTANT NOTE: This does not produce a well-formed XML file. That's because Primo VE does not expect such a file. 
+In addition, namespace declarations need to be moved from <record> into <oai_dc> and a <ListRecords> root element needs to be added-->
 
 <!--@encoding below needs to be us-ascii to deal with diacritics-->
 	<xsl:output method="xml" indent="yes" omit-xml-declaration="no" encoding="us-ascii" media-type="text/xml"/>	
@@ -644,5 +646,4 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 </xsl:template>
 
 
-</xsl:stylesheet>		
-	
+</xsl:stylesheet>
