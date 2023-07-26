@@ -23,9 +23,9 @@ xmlns="http://www.loc.gov/mods/v3">
 		</modsCollection>
 	</xsl:template>
 	
-	<!--xsl:template match="data/item"--><!--changed due to an apparent change to the RDC data structure.-->
+	<!--Records harvested using the CLI or API have the structure root/data/item; records exported in bulk by RDC have the structure root/item-->
 	<xsl:template match="item">
-		
+	
 		<mods>
 			
 		<xsl:call-template name="titleInfo"/>
@@ -51,11 +51,11 @@ xmlns="http://www.loc.gov/mods/v3">
 				<xsl:text>Digital Collections Images Repository</xsl:text>
 			</title></titleInfo>
 		</relatedItem>
-
 		
 		</mods>
-	
+
 	</xsl:template>
+
 
 	
 	<!--Housekeeping. This clears out unneeded information at the bottom of the file related to the query-->
