@@ -12,6 +12,10 @@ xmlns="http://www.loc.gov/mods/v3">
 <!--This XSL creates one MODS file for each DONUT record.-->
 <!--DONUT records are harvested as JSON and must be converted to XML before using this transformation.-->
 <!--updated March 2023 to accommodate the new data structure in the RDC Images repository-->
+<!--updated September 2023 to exclude a slide collection per Nicole Finzer-->
+
+<!--First go to a DOS prompt and run this CLI command: nuldc xml "modified_date:>2023-06-29" dateRange.xml -->
+<!--Note that it must be typed, not run from a .bat file. AND change the date! :-)-->
 
 <xsl:output method="xml" indent="yes" omit-xml-declaration="no"  media-type="text/xml" encoding="utf-8"/>
 <xsl:strip-space elements="*"/>
@@ -26,6 +30,8 @@ xmlns="http://www.loc.gov/mods/v3">
 	<!--Records harvested using the CLI or API have the structure root/data/item; records exported in bulk by RDC have the structure root/item-->
 	<xsl:template match="item">
 	
+		<xsl:if test="collection/id !='49fe3fef-1ba7-473b-81a5-ca4fbbf45ab4'"><!--Exclude copyrighted collection per Nicole Finzer 20230928-->
+		
 		<mods>
 			
 		<xsl:call-template name="titleInfo"/>
@@ -53,6 +59,8 @@ xmlns="http://www.loc.gov/mods/v3">
 		</relatedItem>
 		
 		</mods>
+		
+		</xsl:if>
 
 	</xsl:template>
 
