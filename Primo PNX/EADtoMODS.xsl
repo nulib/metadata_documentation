@@ -65,33 +65,33 @@ xmlns="http://www.loc.gov/mods/v3"
 				<!--select the titleproper that does not have @type='filing' and only select the text in it, not the subordinate <num> element-->
 			<xsl:choose>
 				<xsl:when test="ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num">
-					<xsl:value-of select="normalize-space(substring($title, 1, string-length($title)-string-length(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num[1])))"/>
+						<xsl:value-of select="normalize-space(substring($title, 1, string-length($title)-string-length(ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper[not(@type='filing')]/ead:num[1])))"/>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="$title"/>
 				</xsl:otherwise>
 			</xsl:choose>
 				
-			<xsl:if test="ead:archdesc/ead:did/ead:unittitle/ead:unitdate">
+			<xsl:if test="ead:archdesc/ead:did/ead:unittitle/ead:unitdate[@datechar='creation']">
 				<xsl:text>, </xsl:text>
 				<xsl:choose>
 					<xsl:when test="ead:archdesc/ead:did/ead:unittitle/ead:unitdate[@type='inclusive']">
-						<xsl:value-of select="ead:archdesc/ead:did/ead:unittitle/ead:unitdate[@type='inclusive'][1]"/>
+						<xsl:value-of select="ead:archdesc/ead:did/ead:unittitle/ead:unitdate[@type='inclusive'][@datechar='creation'][1]"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="ead:archdesc/ead:did/ead:unittitle/ead:unitdate[1]"/>
+						<xsl:value-of select="ead:archdesc/ead:did/ead:unittitle/ead:unitdate[@datechar='creation'][1]"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:if>
 			<!--this code is here to catch a unitdate which appears outside of the unittitle, as it does for the Galter GV Black finding aid.-->
-			<xsl:if test="ead:archdesc/ead:did/ead:unitdate">
+			<xsl:if test="ead:archdesc/ead:did/ead:unitdate[@datechar='creation']">
 				<xsl:text>, </xsl:text>
 				<xsl:choose>
-					<xsl:when test="ead:archdesc/ead:did/ead:unitdate[@type='inclusive']">
-						<xsl:value-of select="ead:archdesc/ead:did/ead:unitdate[@type='inclusive'][1]"/>
+					<xsl:when test="ead:archdesc/ead:did/ead:unitdate[@type='inclusive'][@datechar='creation']">
+						<xsl:value-of select="ead:archdesc/ead:did/ead:unitdate[@type='inclusive'][@datechar='creation'][1]"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="ead:archdesc/ead:did/ead:unitdate[1]"/>
+						<xsl:value-of select="ead:archdesc/ead:did/ead:unitdate[@datechar='creation'][1]"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:if>
