@@ -14,6 +14,7 @@ xmlns="http://www.loc.gov/mods/v3"
 <!--ArchivesSpace is not exporting a URL; this has to be manually added to either the EAD, MODS or PNX-->
 <!--Note that ArchivesSpace does not export the <bioghist> associated with an Agent record. This was exported from Archon, so this is a loss of information in the full text search capability of the PNX-->
 <!--updated Aug. 5, 2020 to accommodate multiple Extent sub-records-->
+<!--updated July 2, 2025 to remove EAD URL from the MODS Identifier-->
 
 <!--The eadid@URL value must be manually added to the EAD on export as of March 2017-->
     
@@ -509,11 +510,11 @@ xmlns="http://www.loc.gov/mods/v3"
  
  	<!--identifer-->
 <xsl:template name="identifier">
-	<xsl:if test="ead:archdesc/ead:did/ead:unitid">
+	<xsl:if test="ead:archdesc/ead:did/ead:unitid[not(@type='aspace_uri')]">
 		<identifier type="local" displayLabel="ID">
 			<xsl:value-of select="ead:archdesc/ead:did/ead:repository/ead:corpname"/>
 			<xsl:text> </xsl:text>
-			<xsl:value-of select="ead:archdesc/ead:did/ead:unitid"/>
+			<xsl:value-of select="ead:archdesc/ead:did/ead:unitid[not(@type='aspace_uri')]"/>
 		</identifier>
 	</xsl:if>
 	<identifier displayLabel="PID" type="local"><xsl:value-of select="ead:eadheader/ead:eadid"/></identifier>
