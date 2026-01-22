@@ -14,8 +14,6 @@ xmlns="http://www.loc.gov/mods/v3">
 <!--updated March 2023 to accommodate the new data structure in the RDC Images repository-->
 <!--updated September 2023 to exclude a slide collection per Nicole Finzer-->
 
-<!--First go to a DOS prompt and run this CLI command: nuldc xml "modified_date:>2023-06-29" dateRange.xml -->
-<!--Note that it must be typed, not run from a .bat file. AND change the date! :-)-->
 
 <xsl:output method="xml" indent="yes" omit-xml-declaration="no"  media-type="text/xml" encoding="utf-8"/>
 <xsl:strip-space elements="*"/>
@@ -217,7 +215,7 @@ xmlns="http://www.loc.gov/mods/v3">
 					<xsl:if test=".!='' and ../physical_description_size !=''">
 						<xsl:text> ; </xsl:text>
 					</xsl:if>
-					<xsl:if test="preceding-sibling::physical_description_size">
+					<xsl:if test="../preceding-sibling::physical_description_material">
 						<xsl:text>, </xsl:text>
 					</xsl:if>
 					<xsl:value-of select="."/>
