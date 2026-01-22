@@ -18,7 +18,6 @@ Edited by Karen Miller to meet the needs of NUL.	-->
 <!--Updated March 2023-->
 <!--IMPORTANT NOTE: This does not produce a well-formed XML file. That's because Primo VE does not expect such a file. 
 In addition, namespace declarations need to be moved from <record> into <oai_dc> and a <ListRecords> root element needs to be added-->
-	
 <!--September 2023 removed note about NetID authentication from dcterms:source-->
 
 <!--@encoding below needs to be us-ascii to deal with diacritics-->
@@ -59,6 +58,7 @@ In addition, namespace declarations need to be moved from <record> into <oai_dc>
 				<oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd" xmlns:dcterms="http://www.dublincore.org/schemas/xmls/qdc/dcterms.xsd" xmlns:discovery="http://purl.org/dc/elements/1.1/">
 							
 					<xsl:apply-templates mode="display"/><!--some of the elements get used twice and this allows nodes to get matched more than one-->
+					<xsl:apply-templates mode="search"/>
 					<xsl:apply-templates/>
 
 					<xsl:if test="mods:recordInfo/mods:recordOrigin='Archon' or mods:recordInfo/mods:recordOrigin='ArchivesSpace' ">
