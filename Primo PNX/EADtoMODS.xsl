@@ -561,7 +561,7 @@ xmlns="http://www.loc.gov/mods/v3"
 			<xsl:value-of select="ead:archdesc/ead:did/ead:repository/ead:corpname"/>
 		</physicalLocation>
 		<shelfLocator>
-			<xsl:value-of select="ead:archdesc/ead:did/ead:unitid"/>
+			<xsl:value-of select="ead:archdesc/ead:did/ead:unitid[not(@type='aspace_uri')]"/>
 		</shelfLocator>
 	</location>
 </xsl:template>
