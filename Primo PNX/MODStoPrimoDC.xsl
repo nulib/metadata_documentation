@@ -496,7 +496,6 @@ In addition, namespace declarations need to be moved from <record> into <oai_dc>
 			<discovery:local45>
 				<xsl:choose>
 					<xsl:when test="contains(mods:physicalLocation,'Galter')">
-						<xsl:text>Galter Health Sciences Library (Chicago)</xsl:text>
 						<xsl:text>Galter Health Sciences Library: Special Collections</xsl:text>
 					</xsl:when>
 					<xsl:when test="contains(mods:physicalLocation,'Pritzker')">
